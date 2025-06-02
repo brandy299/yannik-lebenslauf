@@ -62,12 +62,18 @@
             border-color: #FFD700;
         }
 
-        /* Neue CSS-Regel für die sticky linke Spalte */
+        /* Sticky-Effekt nur für größere Bildschirme (Desktop) */
         .left-column-sticky {
-            position: sticky;
-            top: 20px; /* Abstand vom oberen Rand beim Sticky-Effekt */
-            align-self: flex-start; /* Stellt sicher, dass die Box oben klebt und nicht streckt */
-            z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
+            /* Standardmäßig nicht sticky auf kleinen Bildschirmen */
+            position: static;
+        }
+        @media (min-width: 1024px) { /* Ab 'lg' Breakpoint (1024px) wird es sticky */
+            .left-column-sticky {
+                position: sticky;
+                top: 20px; /* Abstand vom oberen Rand beim Sticky-Effekt */
+                align-self: flex-start; /* Stellt sicher, dass die Box oben klebt und nicht streckt */
+                z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
+            }
         }
 
         /* Sektionen und Hauptcontainer bleiben hell */
