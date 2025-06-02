@@ -32,13 +32,36 @@
             margin-left: -1em;
             color: #BE3175; /* Akzentfarbe für Aufzählungszeichen */
         }
+
+        /* Neue CSS-Regeln für das Bild */
+        /* Der Wrapper sorgt für die Zentrierung und den Platz */
+        .profile-image-wrapper {
+            /* w-64 h-64 rounded-full object-cover mb-6 border-4 border-white shadow-lg */
+            /* Diese Tailwind-Klassen sind jetzt hier, um den Wrapper zu stylen */
+            position: relative; /* Wichtig für die Skalierung des Bildes */
+            overflow: hidden; /* Verhindert, dass das Bild über den Rand des Kreises hinausragt, wenn es skaliert wird */
+            display: flex; /* Flexbox für die Zentrierung des Bildes im Wrapper */
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-image {
+            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Sanfte Animation für Größe und Randfarbe */
+            transform-origin: center center; /* Stellt sicher, dass die Skalierung vom Mittelpunkt erfolgt */
+        }
+        .profile-image:hover {
+            transform: scale(1.2); /* Vergrößert das Bild um 20% beim Hover */
+            border-color: #FFD700; /* Randfarbe wird gelb beim Hover */
+        }
     </style>
 </head>
 <body class="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="bg-white shadow-xl rounded-lg overflow-hidden w-full max-w-5xl lg:flex">
         
         <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start">
-            <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="w-64 h-64 rounded-full object-cover mb-6 border-4 border-white shadow-lg">
+            <!-- Bewerbungsfoto Wrapper für bessere Zentrierung und Skalierung -->
+            <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg">
+                <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image">
+            </div>
             
             <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
             <p class="text-lg font-light mb-8">Bildungsexperte & Politikwissenschaftler</p>
@@ -68,7 +91,7 @@
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule, Leibniz Gesamtschule Duisburg (u. a.) | 09/2018 – 02/2025</p>
+                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule, Leibniz Gesamtschule Duisburg  Duisburg (u. a.) | 09/2018 – 02/2025</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
                             <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption und Durchführung von Lehrinhalten, die komplexe Themen verständlich aufbereiten und unterschiedlichen Zielgruppen didaktisch vermitteln.</li>
                             <li class="bullet-point-icon">Gruppenleitung & Moderation: Aktive Begleitung und Anleitung von Gruppen, Förderung von Diskussionen und konstruktiver Zusammenarbeit.</li>
@@ -78,7 +101,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Projektmanager & Marketingverantwortlicher</h3>
-                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 05/2014 – 08/2018</p>
+                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 2014 – 2018</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
                             <li class="bullet-point-icon">Projektkoordination: Verantwortlich für Konzeptentwicklung, Abwicklung und Monitoring vielfältiger Projekte, oft mit Bildungs- oder Eventcharakter.</li>
                             <li class="bullet-point-icon">Budgetverwaltung: Eigenständige finanzielle Planung und Überwachung von Projektbudgets sowie Kalkulation von Maßnahmen.</li>
