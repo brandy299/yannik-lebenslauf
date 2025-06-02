@@ -33,32 +33,55 @@
             color: #BE3175; /* Akzentfarbe für Aufzählungszeichen */
         }
 
-        /* Neue CSS-Regeln für das Bild */
-        /* Der Wrapper sorgt für die Zentrierung und den Platz */
+        /* Regeln für das Profilbild */
         .profile-image-wrapper {
-            /* w-64 h-64 rounded-full object-cover mb-6 border-4 border-white shadow-lg */
-            /* Diese Tailwind-Klassen sind jetzt hier, um den Wrapper zu stylen */
-            position: relative; /* Wichtig für die Skalierung des Bildes */
-            overflow: hidden; /* Verhindert, dass das Bild über den Rand des Kreises hinausragt, wenn es skaliert wird */
-            display: flex; /* Flexbox für die Zentrierung des Bildes im Wrapper */
+            position: relative;
+            overflow: hidden;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
         .profile-image {
-            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Sanfte Animation für Größe und Randfarbe */
-            transform-origin: center center; /* Stellt sicher, dass die Skalierung vom Mittelpunkt erfolgt */
+            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            transform-origin: center center;
         }
         .profile-image:hover {
-            transform: scale(1.2); /* Vergrößert das Bild um 20% beim Hover */
-            border-color: #FFD700; /* Randfarbe wird gelb beim Hover */
+            transform: scale(1.2);
+            border-color: #FFD700;
+        }
+
+        /* Neue CSS-Regel für die sticky linke Spalte */
+        .left-column-sticky {
+            position: sticky;
+            top: 20px; /* Abstand vom oberen Rand beim Sticky-Effekt */
+            align-self: flex-start; /* Stellt sicher, dass die Box oben klebt und nicht streckt */
+            z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
+        }
+
+        /* Neue CSS-Regeln für sanfte Schatten auf Sektionen */
+        section {
+            background-color: #ffffff; /* Hintergrundfarbe für die Sektionen */
+            border-radius: 8px; /* Abgerundete Ecken für den "Karten"-Look */
+            padding: 2rem; /* Innenabstand für den Inhalt der Sektion */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sanfter Schatten (ähnlich Tailwind's shadow-md) */
+            margin-bottom: 2rem; /* Abstand zwischen den Sektionen */
+        }
+        /* Anpassung des letzten Sektionsabstands */
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+        /* Anpassung des section-heading, da jetzt padding auf der section ist */
+        .section-heading {
+            margin-top: 0; /* Kein Top-Margin, da Section Padding hat */
+            margin-bottom: 1.5rem; /* Abstand unter der Überschrift */
+            padding-top: 0; /* Kein Top-Padding, da Section Padding hat */
         }
     </style>
 </head>
 <body class="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow-xl rounded-lg overflow-hidden w-full max-w-5xl lg:flex">
+    <div class="bg-white shadow-xl rounded-lg w-full max-w-5xl lg:flex">
         
-        <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start">
-            <!-- Bewerbungsfoto Wrapper für bessere Zentrierung und Skalierung -->
+        <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
             <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg">
                 <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image">
             </div>
@@ -70,8 +93,8 @@
                 <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kontakt</h2>
                 <ul class="space-y-2 text-sm">
                     <li>📍 Kardinal Galen Straße 44, 47051 Duisburg</li>
-                    <li>📞 (+49) 176 91360115</li>
-                    <li>✉️ yannik.brand.work@gmail.com</li>
+                    <li>📞 <a href="tel:+4917691360115" class="underline hover:text-gray-200">(+49) 176 91360115</a></li>
+                    <li>✉️ <a href="mailto:yannik.brand.work@gmail.com" class="underline hover:text-gray-200">yannik.brand.work@gmail.com</a></li>
                     <li>🌐 <a href="[Link zu deinem Online-Portfolio/Website]" target="_blank" class="underline hover:text-gray-200">Online-Portfolio</a></li>
                 </ul>
             </div>
@@ -86,17 +109,24 @@
 
         <div class="lg:w-2/3 p-8">
             
-            <section class="mb-8">
-                <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
+            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule, Leibniz Gesamtschule Duisburg  Duisburg (u. a.) | 09/2018 – 02/2025</p>
+                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) | 09/2018 – 02/2025</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
                             <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption und Durchführung von Lehrinhalten, die komplexe Themen verständlich aufbereiten und unterschiedlichen Zielgruppen didaktisch vermitteln.</li>
                             <li class="bullet-point-icon">Gruppenleitung & Moderation: Aktive Begleitung und Anleitung von Gruppen, Förderung von Diskussionen und konstruktiver Zusammenarbeit.</li>
                             <li class="bullet-point-icon">Curriculum-Entwicklung: Entwicklung und Adaption von Lehr- und Lernmaterialien, um Bildungsziele effektiv zu erreichen.</li>
                             <li class="bullet-point-icon">Organisation & Planung: Eigenverantwortliche Planung und Durchführung von Unterrichtseinheiten und schulinternen Projekten.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Lehrkraft für Geschichte, Politik und Wirtschaft</h3>
+                        <p class="text-gray-600 text-sm mb-1">Berufskolleg am Haspel, Wuppertal | 09/2023 - 02/2024</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Didaktische Aufbereitung und Vermittlung komplexer sozialwissenschaftlicher Inhalte an diverse Zielgruppen.</li>
+                            <li class="bullet-point-icon">Entwicklung von Lehrstrategien zur Förderung kritischen Denkens und aktiver Beteiligung.</li>
                         </ul>
                     </div>
                     <div>
@@ -122,12 +152,11 @@
                 </div>
             </section>
 
-            <section class="mb-8">
-                <h2 class="text-2xl font-semibold section-heading accent-color">Ausbildung</h2>
+            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Ausbildung</h2>
                 <div class="space-y-4">
                     <div>
                         <h3 class="text-lg font-semibold">M.A. European Culture and Economy (ECUE)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | [Startdatum, z.B. 10/2017] – [Enddatum, z.B. 09/2019]</p>
+                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 10/2021 – 03/2024</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
                             <li class="bullet-point-icon">Schwerpunkte: Europäische Politik, Förderstrukturen, Transformationsprozesse, Policy-Analysen.</li>
                             <li class="bullet-point-icon">Vertiefung in der Analyse komplexer gesellschaftlicher und politischer Themen, relevant für die Konzeption und Evaluation von Bildungsangeboten.</li>
@@ -144,8 +173,7 @@
                 </div>
             </section>
 
-            <section class="mb-8">
-                <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
+            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
                 <div class="space-y-4 text-sm text-gray-700">
                     <div>
                         <h3 class="font-semibold mb-1">Organisation & Koordination:</h3>
@@ -180,8 +208,7 @@
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-2xl font-semibold section-heading accent-color">Sprachen & Interessen</h2>
+            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Sprachen & Interessen</h2>
                 <div class="space-y-4 text-sm text-gray-700">
                     <div>
                         <h3 class="font-semibold mb-1">Sprachen:</h3>
