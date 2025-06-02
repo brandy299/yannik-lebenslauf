@@ -3,77 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yannik Brand | Social Media & Digitale Kommunikation</title>
+    <title>Lebenslauf Yannik Brand</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; /* Sehr heller Hintergrund */
+            color: #333333; /* Dunkelgrau für Haupttext */
         }
-        .die-linke-red { color: #BE3175; }
-        .bg-die-linke-red { background-color: #BE3175; }
-        .border-die-linke-red { border-color: #BE3175; }
-        .bg-die-linke-blue { background-color: #2A4D62; }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            left: -2.5rem;
-            top: 0.25rem;
-            background-color: #BE3175;
-            border: 3px solid #f8f9fa;
+        .header-bg {
+            background-color: #333333; /* Dunkelgrau */
         }
-        .tab-active {
-            border-bottom: 2px solid #BE3175;
-            color: #BE3175;
-            font-weight: 700;
+        .accent-color {
+            color: #BE3175; /* Roter Akzent */
         }
-        /* Style for the chart container, even if no Chart.js used for this specific resume */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px; /* Example max-width */
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px; /* Base height, adjust with media queries or use Tailwind for responsive heights */
-            max-height: 400px;
+        .section-heading {
+            border-bottom: 2px solid #E0E0E0; /* Hellgraue Trennlinie */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        .bullet-point-icon::before {
+            content: '•'; /* Unicode Aufzählungszeichen */
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            color: #BE3175; /* Akzentfarbe für Aufzählungszeichen */
         }
     </style>
 </head>
-<body class="text-gray-800">
-
-    <header class="bg-die-linke-blue text-white text-center p-12 md:p-20">
-        <h1 class="text-4xl md:text-6xl font-extrabold">Yannik Brand</h1>
-        <p class="text-xl md:text-2xl mt-4 font-light">Social Media & Digitale Kommunikation</p>
-        <div class="mt-8 space-x-4">
-            <a href="#portfolio" class="bg-die-linke-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">Portfolio ansehen</a>
-            <a href="#kontakt" class="bg-white text-gray-800 hover:bg-gray-200 font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">Kontakt</a>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-6 py-12 max-w-4xl">
+<body class="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow-xl rounded-lg overflow-hidden w-full max-w-5xl lg:flex">
         
-        <section id="profil" class="mb-16 scroll-mt-20">
-            <h2 class="text-3xl font-bold mb-6 text-center die-linke-red">Kurzprofil</h2>
-            <p class="text-lg text-center leading-relaxed">
-                Engagierter Kommunikationsprofi mit 5 Jahren Erfahrung im Projektmanagement und Marketing sowie relevanter Lehrerfahrung, spezialisiert auf die Konzeption und Umsetzung wirkungsvoller Kampagnen und die verständliche Vermittlung komplexer Inhalte. Mit einem Master in European Culture and Economy und einem ausgeprägten ideologischen Interesse an nachhaltiger Entwicklung und europäischer Politik, bringe ich analytische Fähigkeiten mit, um politische Themen zielgruppengerecht und digital aufzubereiten. Ich bin ein Digital Native mit Leidenschaft für Social Media, Content Creation und Community Building, bereit, die digitale Präsenz von DIE LINKE NRW kreativ und strategisch zu stärken.
-            </p>
-        </section>
+        <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start">
+            <img src="bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-white shadow-lg">
+            
+            <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
+            <p class="text-lg font-light mb-8">Pädagoge & Projektmanager</p>
+            
+            <div class="w-full mb-8">
+                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kontakt</h2>
+                <ul class="space-y-2 text-sm">
+                    <li>📍 Kardinal Galen Straße 44, 47051 Duisburg</li>
+                    <li>📞 (+49) 176 91360115</li>
+                    <li>✉️ yannik.brand.work@gmail.com</li>
+                    <li>🌐 <a href="[Link zu deinem Online-Portfolio/Website]" target="_blank" class="underline hover:text-gray-200">Online-Portfolio</a></li>
+                </ul>
+            </div>
 
-        <div class="w-full h-px bg-gray-300 my-16"></div>
+            <div class="w-full">
+                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kurzprofil</h2>
+                <p class="text-sm leading-relaxed">
+                    Engagierter Projektmanager und Pädagoge mit <strong>4 Jahren Erfahrung im Projektmanagement und Marketing</strong> sowie umfassender <strong>Lehrerfahrung</strong>, spezialisiert auf die Konzeption, Organisation und Durchführung von Bildungsmaßnahmen und Veranstaltungen. Mit einem <strong>Master in European Culture and Economy</strong> und einem ausgeprägten Interesse an gesellschaftlichen und politischen Bildungsprozessen, bringe ich starke analytische Fähigkeiten und ein hohes Organisationstalent mit, um politische Themen zielgruppengerecht und digital aufzubereiten. Ich bin ein Digital Native mit Leidenschaft für Social Media, Content Creation und Community Building, bereit, die digitale Präsenz der DGB Jugend NRW kreativ und strategisch zu stärken.
+                </p>
+            </div>
+        </div>
 
-        <section id="kompetenzen" class="mb-16 scroll-mt-20">
-            <h2 class="text-3xl font-bold mb-8 text-center die-linke-red">Kernkompetenzen</h2>
-            <div class="mb-8">
-                <div class="flex justify-center border-b border-gray-300">
-                    <button data-tab="digital" class="tab-button py-4 px-6 text-gray-500 font-semibold tab-active">Digital &
+        <div class="lg:w-2/3 p-8">
+            
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
+                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) | 09/2018 – 02/2025</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption und Durchführung von Lehrinhalten, die komplexe Themen verständlich aufbereiten und unterschiedlichen Zielgruppen didaktisch vermitteln.</li>
+                            <li class="bullet-point-icon">Gruppenleitung & Moderation: Aktive Begleitung und Anleitung von Gruppen, Förderung von Diskussionen und konstruktiver Zusammenarbeit.</li>
+                            <li class="bullet-point-icon">Curriculum-Entwicklung: Entwicklung und Adaption von Lehr- und Lernmaterialien, um Bildungsziele effektiv zu erreichen.</li>
+                            <li class="bullet-point-icon">Organisation & Planung: Eigenverantwortliche Planung und Durchführung von Unterrichtseinheiten und schulinternen Projekten.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Projektmanager & Marketingverantwortlicher</h3>
+                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 2014 – 2018</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Projektkoordination: Verantwortlich für Konzeptentwicklung, Abwicklung und Monitoring vielfältiger Projekte, oft mit Bildungs- oder Eventcharakter.</li>
+                            <li class="bullet-point-icon">Budgetverwaltung: Eigenständige finanzielle Planung und Überwachung von Projektbudgets sowie Kalkulation von Maßnahmen.</li>
+                            <li class="bullet-point-icon">Partnerkommunikation: Aufbau und Pflege von Beziehungen zu internen und externen Projektpartnern sowie Stakeholdern.</li>
+                            <li class="bullet-point-icon">Organisatorische Verantwortung: Koordination logistischer und administrativer Abläufe für Veranstaltungen und Workshops.</li>
+                            <li class="bullet-point-icon">Marketing & Reichweite: Entwicklung und Umsetzung von Maßnahmen zur Bewerbung von Projekten und zur Teilnehmenden-Akquisition.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">Praktikant Stabsstelle für Europaangelegenheiten</h3>
+                        <p class="text-gray-600 text-sm mb-1">Stadt Essen | 01/2024 – 03/2024</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Unterstützung bei der Kommunikation und Koordination europäischer Angelegenheiten im öffentlichen Sektor.</li>
+                            <li class="bullet-point-icon">Einblicke in die Verwaltungskommunikation und die Aufbereitung politischer Inhalte.</li>
+                            <li class="bullet-point-icon">Mitarbeit an der Konzeption und Durchführung von Aktionen im Rahmen der Ruhr-Europakampagne "Lets Europe".</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold section-heading accent-color">Ausbildung</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-semibold">M.A. European Culture and Economy (ECUE)</h3>
+                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | [Startdatum, z.B. 10/2017] – [Enddatum, z.B. 09/2019]</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Schwerpunkte: Europäische Politik, Förderstrukturen, Transformationsprozesse, Policy-Analysen.</li>
+                            <li class="bullet-point-icon">Vertiefung in der Analyse komplexer gesellschaftlicher und politischer Themen, relevant für die Konzeption und Evaluation von Bildungsangeboten.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold">B.A. 2 - Fach Bachelor of Arts Englisch und Geschichte</h3>
+                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 04/2011 – 03/2021</p>
+                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                            <li class="bullet-point-icon">Stärkung analytischer und textlicher Fähigkeiten durch wissenschaftliches Arbeiten und Diskursanalyse.</li>
+                            <li class="bullet-point-icon">Vertieftes geschichtliches und kulturelles Wissen zur Perspektivenerfassung und Problemlösung.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
+                <div class="space-y-4 text-sm text-gray-700">
+                    <div>
+                        <h3 class="font-semibold mb-1">Organisation & Koordination:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Ausgeprägte Fähigkeit zu organisieren, Terminmanagement, Projektmanagement, Veranstaltungsplanung.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Kommunikation:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Sehr gute Kommunikationsfähigkeiten, Präsentations- und Moderationstechniken, zielgruppengerechte Ansprache.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Digitale Tools:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">MS Office 365 (Word, Excel, PowerPoint, Outlook), Cloud-Kollaborationstools (z.B. MS Teams, Slack), Grundkenntnisse in Figma/Canva für Materialerstellung.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Schnelle Einarbeitung in neue Themenfelder, Evaluationskompetenz, Datenanalyse.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Soft Skills:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Hohe Flexibilität und Einsatzbereitschaft, Teamfähigkeit, Zuverlässigkeit, Eigeninitiative, strukturiertes Arbeiten.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-semibold section-heading accent-color">Sprachen & Interessen</h2>
+                <div class="space-y-4 text-sm text-gray-700">
+                    <div>
+                        <h3 class="font-semibold mb-1">Sprachen:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Deutsch (Muttersprache), Englisch (verhandlungssicher), Grundkenntnisse in Französisch, Latinum.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Interessen:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Ausgeprägtes und ideologisch fest verankertes Interesse an gewerkschaftlicher Jugend- und Bildungsarbeit, gesellschaftlicher Partizipation und politischer Bildung. Bereitschaft zu Wochenendarbeit und Abendterminen.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>
