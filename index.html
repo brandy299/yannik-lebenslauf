@@ -11,14 +11,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Gedämpfter Regenbogen-Verlauf als Hintergrund */
-            background-image: linear-gradient(to right, #FF6666, #FFB366, #FFFF66, #99FF99, #66B3FF, #9966CC, #CC66FF);
+            /* Extrem dezenter, fast weißer Farbverlauf als Hintergrund */
+            background-image: linear-gradient(to right, #FDFDFD, #FAFAFA, #FDFDFD);
             background-size: 400% 400%; /* Wichtig für den Verlauf */
             animation: rainbow_gradient 15s ease infinite; /* Animation für den Verlauf */
             color: #333333; /* Haupttext Dunkelgrau für Lesbarkeit */
+            padding: 0; /* Entfernt Padding vom Body, um Whitespace zu vermeiden */
+            margin: 0; /* Entfernt Margin vom Body */
         }
 
-        /* Keyframes für die Regenbogen-Animation */
+        /* Keyframes für die Regenbogen-Animation (jetzt extrem subtil) */
         @keyframes rainbow_gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -52,25 +54,75 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer; /* Zeigt an, dass es klickbar ist */
+            /* Subtiler, langsamer Schatten als Klick-Hinweis */
+            animation: idle-subtle-glow 4s ease-in-out infinite alternate;
         }
+
+        @keyframes idle-subtle-glow {
+            0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } /* Standard Schatten */
+            100% { box-shadow: 0 4px 6px 15px rgba(255, 215, 0, 0.6), 0 2px 4px 8px rgba(255, 215, 0, 0.3); } /* Deutlicherer Gelb-Schatten */
+        }
+
+        .profile-image-wrapper:hover,
+        .profile-image-wrapper.clicked-glow {
+            animation-play-state: paused; /* Pausiert die Idle-Animation bei Hover oder Klick-Glow */
+            /* Stellt sicher, dass der Standard-Schatten wiederhergestellt wird, bevor der Klick-Glow greift */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
         .profile-image {
-            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out; /* Nur Transform-Transition, Border-Color wird per JS/Class gesetzt */
             transform-origin: center center;
+            /* Standard-Zoom wird per JS gesetzt */
         }
-        .profile-image:hover {
-            transform: scale(1.2);
-            border-color: #FFD700;
+
+        /* Click glow effect für den Rahmen */
+        .profile-image-wrapper.clicked-glow {
+            animation: border-glow-pulse 0.3s ease-out; /* Schneller und deutlicher */
+        }
+
+        @keyframes border-glow-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 1); } /* Start mit vollem Glow */
+            100% { box-shadow: 0 0 0 40px rgba(255, 215, 0, 0); } /* Noch weiter expandieren und ausfaden */
+        }
+
+        /* Hire Me Banner */
+        .hire-me-banner {
+            position: absolute;
+            top: 50%; /* Zentriert vertikal im Wrapper */
+            left: 50%; /* Zentriert horizontal im Wrapper */
+            /* Startet von unten und ist kleiner */
+            transform: translate(-50%, 50%) scale(0.5); 
+            padding: 1rem 2rem; /* Größerer Innenabstand */
+            background-image: linear-gradient(to right, #BE3175, #A02860); /* Verlaufender Hintergrund */
+            color: white;
+            border-radius: 9999px; /* Pillenform */
+            font-weight: bold;
+            font-size: 1.8rem; /* Größere Schrift */
+            opacity: 0; /* Standardmäßig unsichtbar */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Längere, sanftere Übergänge */
+            z-index: 20; /* Über dem Bild */
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Starker Schatten für das Banner */
+        }
+        .hire-me-active {
+            opacity: 1; /* Sichtbar, wenn aktiv */
+            transform: translate(-50%, -50%) scale(1); /* Skaliert auf normale Größe und zentriert sich */
+        }
+        .hire-me-fading-out {
+            opacity: 0;
+            transform: translate(-50%, 50%) scale(0.5); /* Fadet nach unten und wird kleiner beim Ausblenden */
         }
 
         /* Sticky-Effekt nur für größere Bildschirme (Desktop) */
         .left-column-sticky {
-            /* Standardmäßig nicht sticky auf kleinen Bildschirmen */
-            position: static;
+            position: static; /* Standardmäßig nicht sticky auf kleinen Bildschirmen */
         }
         @media (min-width: 1024px) { /* Ab 'lg' Breakpoint (1024px) wird es sticky */
             .left-column-sticky {
                 position: sticky;
-                top: 20px; /* Abstand vom oberen Rand beim Sticky-Effekt */
+                top: 0px; /* Abstand vom oberen Rand beim Sticky-Effekt auf 0 gesetzt */
                 align-self: flex-start; /* Stellt sicher, dass die Box oben klebt und nicht streckt */
                 z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
             }
@@ -81,7 +133,19 @@
             background-color: #ffffff; /* Hintergrund Weiß */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sanfter Schatten */
             border-radius: 8px; /* Abgerundete Ecken */
+            padding: 3rem 1rem; /* Vertikales Padding hier hinzugefügt */
         }
+        @media (min-width: 640px) { /* Anpassung für sm-Breakpoint */
+            .main-content-card {
+                padding: 3rem 2rem;
+            }
+        }
+        @media (min-width: 1024px) { /* Anpassung für lg-Breakpoint */
+            .main-content-card {
+                padding: 3rem;
+            }
+        }
+
         section {
             background-color: #ffffff; /* Hintergrundfarbe für die Sektionen */
             border-radius: 8px; /* Abgerundete Ecken für den "Karten"-Look */
@@ -119,12 +183,13 @@
         }
     </style>
 </head>
-<body class="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+<body class="flex justify-center">
     <div class="main-content-card rounded-lg w-full max-w-5xl lg:flex">
         
         <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
-            <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg">
-                <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image">
+            <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
+                <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
+                <div id="hire-me-banner" class="hire-me-banner">HIRE ME!</div>
             </div>
             
             <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
@@ -143,13 +208,12 @@
             <div class="w-full">
                 <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kurzprofil</h2>
                 <p class="text-sm leading-relaxed">
-                    Engagierter Projektmanager und Pädagoge mit <strong>4 Jahren Erfahrung im Projektmanagement und Marketing</strong> sowie umfassender <strong>Lehrerfahrung</strong>, spezialisiert auf die Konzeption, Organisation und Durchführung von Bildungsmaßnahmen und Veranstaltungen. Mit einem <strong>Master in European Culture and Economy</strong> und einem ausgeprägten Interesse an gesellschaftlichen und politischen Bildungsprozessen, bringe ich starke analytische Fähigkeiten und ein hohes Organisationstalent mit, um politische Themen zielgruppengerecht und digital aufzubereiten. Ich bin ein Digital Native mit Leidenschaft für Social Media, Content Creation und Community Building, bereit, die digitale Präsenz der DGB Jugend NRW kreativ und strategisch zu stärken.
+                    <strong>Engagierter Bildungsexperte und Projektmanager</strong> mit 4 Jahren Praxis in Projektmanagement, Marketing und Lehre. Ich konzipiere und realisiere wirkungsvolle Bildungsmaßnahmen und Events. Mein <strong>Master in European Culture and Economy</strong> und ausgeprägtes Interesse an gesellschaftlichen Bildungsprozessen ermöglichen es mir, politische Inhalte zielgruppengerecht und digital aufzubereiten. Als Digital Native stärke ich die digitale Präsenz der DGB Jugend NRW durch Social Media, Content Creation und Community Building.
                 </p>
             </div>
         </div>
 
         <div class="lg:w-2/3 p-8">
-            
             <section> <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
                 <div class="space-y-6">
                     <div>
@@ -223,13 +287,20 @@
                     <div>
                         <h3 class="font-semibold mb-1">Digitale Tools:</h3>
                         <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">MS Office 365 (Word, Excel, PowerPoint, Outlook), Cloud-Kollaborationstools (z.B. MS Teams, Slack), Grundkenntnisse in Figma/Canva für Materialerstellung.</li>
+                            <li class="bullet-point-icon">MS Office 365 (Word, Excel, PowerPoint, Outlook)</li>
+                            <li class="bullet-point-icon">Cloud-Kollaborationstools (z.B. MS Teams, Slack)</li>
+                            <li class="bullet-point-icon">Figma/Canva (Grundkenntnisse für Materialerstellung)</li>
+                            <li class="bullet-point-icon">GitHub (Grundkenntnisse)</li>
+                            <li class="bullet-point-icon">HTML (Grundkenntnisse)</li>
+                            <li class="bullet-point-icon">LibreOffice</li>
+                            <li class="bullet-point-icon">R (Grundkenntnisse)</li>
+                            <li class="bullet-point-icon">MAXQDA</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
                         <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Schnelle Einarbeitung in neue Themenfelder, Evaluationskompetenz, Datenanalyse.</li>
+                            <li class="bullet-point-icon">Schnelle Einarbeitung in neue Themenfelder, Evaluationskompetenz, Datenanalyse, Recherche auf hohem akademischen Level.</li>
                         </ul>
                     </div>
                     <div>
@@ -260,5 +331,96 @@
 
         </div>
     </div>
+
+    <script>
+        let clickCount = 0;
+        const profileImageContainer = document.getElementById('profile-image-container'); // Wrapper for the image
+        const profileImage = document.getElementById('profile-image'); // The image itself
+        const hireMeBanner = document.getElementById('hire-me-banner');
+
+        // Define zoom levels for clicks
+        const clickZoomLevels = [1.9, 2.1, 2.3, 2.5]; // These are absolute scales
+
+        const defaultScale = 1.4; // Initial scale of the image
+        const hoverScale = 1.6; // Scale on mouse hover
+
+        let currentZoomTimeout = null;
+
+        // Set initial scale on load
+        profileImage.style.transform = `scale(${defaultScale})`;
+
+        if (profileImageContainer && profileImage) {
+            // Mouseenter event for hover zoom
+            profileImageContainer.addEventListener('mouseenter', () => {
+                // Only apply hover zoom if no click-zoom is currently active
+                // (i.e., no specific scale set by a click that hasn't reset yet)
+                if (profileImage.style.transform === `scale(${defaultScale})` || profileImage.style.transform === '') {
+                    profileImage.style.transform = `scale(${hoverScale})`;
+                }
+                // Pause the idle glow animation
+                profileImageContainer.style.animationPlayState = 'paused';
+            });
+
+            // Mouseleave event to revert from hover zoom
+            profileImageContainer.addEventListener('mouseleave', () => {
+                // Only revert from hover if no click-zoom is currently active
+                if (profileImage.style.transform === `scale(${hoverScale})`) {
+                    profileImage.style.transform = `scale(${defaultScale})`;
+                }
+                // Resume the idle glow animation
+                profileImageContainer.style.animationPlayState = 'running';
+            });
+
+
+            profileImageContainer.addEventListener('click', () => {
+                clickCount++;
+
+                // Apply click glow effect to the wrapper
+                profileImageContainer.classList.add('clicked-glow');
+                setTimeout(() => {
+                    profileImageContainer.classList.remove('clicked-glow');
+                }, 500); // Duration of the glow animation
+
+                // Apply progressive zoom based on click count
+                if (clickCount <= clickZoomLevels.length) {
+                    profileImage.style.transform = `scale(${clickZoomLevels[clickCount - 1]})`;
+                } else {
+                    // If more clicks than defined levels, maintain max zoom
+                    profileImage.style.transform = `scale(${clickZoomLevels[clickZoomLevels.length - 1]})`;
+                }
+
+                // Clear any existing timeout for zoom reset
+                if (currentZoomTimeout) {
+                    clearTimeout(currentZoomTimeout);
+                }
+
+                // Set a timeout to reset zoom after 2 seconds, unless another click happens
+                // This timeout is only set if the banner is NOT about to appear
+                if (clickCount < 4) {
+                    currentZoomTimeout = setTimeout(() => {
+                        profileImage.style.transform = `scale(${defaultScale})`; // Revert to default scale
+                    }, 2000); // Zoom fades back after 2 seconds
+                }
+
+                // Show and fade out "Hire Me!" banner after 4 clicks
+                if (clickCount >= 4) {
+                    hireMeBanner.classList.add('hire-me-active');
+                    // Clear any pending zoom reset timeout
+                    if (currentZoomTimeout) {
+                        clearTimeout(currentZoomTimeout);
+                    }
+                    setTimeout(() => {
+                        hireMeBanner.classList.remove('hire-me-active');
+                        hireMeBanner.classList.add('hire-me-fading-out'); // Add fading out class
+                        setTimeout(() => {
+                            hireMeBanner.classList.remove('hire-me-fading-out'); // Remove after animation
+                            clickCount = 0; // Reset click count after banner fades out
+                            profileImage.style.transform = `scale(${defaultScale})`; // Ensure image resets to default
+                        }, 500); // Duration of the fade-out animation
+                    }, 1000); // Banner stays active for 1 second
+                }
+            });
+        }
+    </script>
 </body>
 </html>
