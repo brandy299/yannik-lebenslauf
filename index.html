@@ -11,11 +11,23 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* Sehr heller Hintergrund */
-            color: #333333; /* Dunkelgrau für Haupttext */
+            /* Gedämpfter Regenbogen-Verlauf als Hintergrund */
+            background-image: linear-gradient(to right, #FF6666, #FFB366, #FFFF66, #99FF99, #66B3FF, #9966CC, #CC66FF);
+            background-size: 400% 400%; /* Wichtig für den Verlauf */
+            animation: rainbow_gradient 15s ease infinite; /* Animation für den Verlauf */
+            color: #333333; /* Haupttext Dunkelgrau für Lesbarkeit */
         }
+
+        /* Keyframes für die Regenbogen-Animation */
+        @keyframes rainbow_gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header-bg {
-            background-color: #333333; /* Dunkelgrau */
+            background-color: #333333; /* Dunkelgrau für den Header der linken Spalte */
+            color: #ffffff; /* Text in diesem Header bleibt weiß */
         }
         .accent-color {
             color: #BE3175; /* Roter Akzent */
@@ -58,13 +70,19 @@
             z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
         }
 
-        /* Neue CSS-Regeln für sanfte Schatten auf Sektionen */
+        /* Sektionen und Hauptcontainer bleiben hell */
+        .main-content-card { /* Neue Klasse für den Hauptcontainer */
+            background-color: #ffffff; /* Hintergrund Weiß */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sanfter Schatten */
+            border-radius: 8px; /* Abgerundete Ecken */
+        }
         section {
             background-color: #ffffff; /* Hintergrundfarbe für die Sektionen */
             border-radius: 8px; /* Abgerundete Ecken für den "Karten"-Look */
             padding: 2rem; /* Innenabstand für den Inhalt der Sektion */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sanfter Schatten (ähnlich Tailwind's shadow-md) */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Leichterer Schatten für helle Sektionen */
             margin-bottom: 2rem; /* Abstand zwischen den Sektionen */
+            color: #333333; /* Textfarbe für Sektionen */
         }
         /* Anpassung des letzten Sektionsabstands */
         section:last-of-type {
@@ -76,10 +94,27 @@
             margin-bottom: 1.5rem; /* Abstand unter der Überschrift */
             padding-top: 0; /* Kein Top-Padding, da Section Padding hat */
         }
+        /* Anpassung der Textfarben in Sektionen für bessere Lesbarkeit auf hellem Hintergrund */
+        section h3 {
+            color: #333333; /* Überschriften in Sektionen dunkel */
+        }
+        section p.text-gray-600 {
+            color: #666666; /* Datum/Ort in Sektionen dunkler Grau */
+        }
+        section ul.text-gray-700 li {
+            color: #444444; /* Listenpunkte in Sektionen dunkler Grau */
+        }
+        /* Links in der linken Spalte */
+        .left-column-sticky a {
+            color: #e0e0e0; /* Links in linker Spalte heller */
+        }
+        .left-column-sticky a:hover {
+            color: #ffffff; /* Links in linker Spalte beim Hover weiß */
+        }
     </style>
 </head>
 <body class="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow-xl rounded-lg w-full max-w-5xl lg:flex">
+    <div class="main-content-card rounded-lg w-full max-w-5xl lg:flex">
         
         <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
             <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg">
@@ -113,20 +148,12 @@
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) | 09/2018 – 02/2025</p>
+                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) & Berufskolleg am Haspel, Wuppertal | 09/2018 – 02/2025</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption und Durchführung von Lehrinhalten, die komplexe Themen verständlich aufbereiten und unterschiedlichen Zielgruppen didaktisch vermitteln.</li>
+                            <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption, didaktische Aufbereitung und Durchführung von Lehrinhalten in Geschichte, Politik, Wirtschaft und Englisch, um komplexe Themen verständlich an diverse Zielgruppen zu vermitteln.</li>
+                            <li class="bullet-point-icon">Entwicklung von Lehrstrategien und Curriculum: Adaption von Lehr- und Lernmaterialien sowie Förderung kritischen Denkens und aktiver Beteiligung.</li>
                             <li class="bullet-point-icon">Gruppenleitung & Moderation: Aktive Begleitung und Anleitung von Gruppen, Förderung von Diskussionen und konstruktiver Zusammenarbeit.</li>
-                            <li class="bullet-point-icon">Curriculum-Entwicklung: Entwicklung und Adaption von Lehr- und Lernmaterialien, um Bildungsziele effektiv zu erreichen.</li>
                             <li class="bullet-point-icon">Organisation & Planung: Eigenverantwortliche Planung und Durchführung von Unterrichtseinheiten und schulinternen Projekten.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">Lehrkraft für Geschichte, Politik und Wirtschaft</h3>
-                        <p class="text-gray-600 text-sm mb-1">Berufskolleg am Haspel, Wuppertal | 09/2023 - 02/2024</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Didaktische Aufbereitung und Vermittlung komplexer sozialwissenschaftlicher Inhalte an diverse Zielgruppen.</li>
-                            <li class="bullet-point-icon">Entwicklung von Lehrstrategien zur Förderung kritischen Denkens und aktiver Beteiligung.</li>
                         </ul>
                     </div>
                     <div>
