@@ -8,31 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlalTjs12kE+8r3m4D1a1B7y/j8X0+v6+7Q2Q7z7l02/7U04W4+K/7F9b9t9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Extrem dezenter, fast weißer Farbverlauf als Hintergrund */
-            background-image: linear-gradient(to right, #FDFDFD, #FAFAFA, #FDFDFD);
-            background-size: 400% 400%; /* Wichtig für den Verlauf */
-            animation: rainbow_gradient 15s ease infinite; /* Animation für den Verlauf */
+            /* Hintergrund: Reines Weiß für eine professionelle und ruhige Optik */
+            background-color: #FFFFFF;
             color: #333333; /* Haupttext Dunkelgrau für Lesbarkeit */
-            padding: 0; /* Entfernt Padding vom Body, um Whitespace zu vermeiden */
-            margin: 0; /* Entfernt Margin vom Body */
+            padding: 0;
+            margin: 0;
+            line-height: 1.5; /* Standard-Zeilenhöhe für gute Lesbarkeit */
         }
 
-        /* Keyframes für die Regenbogen-Animation (jetzt extrem subtil) */
-        @keyframes rainbow_gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .header-bg {
-            background-color: #333333; /* Dunkelgrau für den Header der linken Spalte */
-            color: #ffffff; /* Text in diesem Header bleibt weiß */
-        }
+        /* Akzentfarbe für Überschriften und Icons */
         .accent-color {
-            color: #BE3175; /* Roter Akzent */
+            color: #EF4444; /* Roter Akzent wie zuvor */
         }
         .section-heading {
             border-bottom: 2px solid #E0E0E0; /* Hellgraue Trennlinie */
@@ -44,8 +34,13 @@
             display: inline-block;
             width: 1em;
             margin-left: -1em;
-            color: #BE3175; /* Akzentfarbe für Aufzählungszeichen */
+            color: #EF4444; /* Akzentfarbe für Aufzählungszeichen im Hauptteil */
         }
+        /* Spezifische Farbe für Bullet Points in der linken Spalte */
+        .left-column .bullet-point-icon::before {
+            color: #FFFFFF; /* Weiße Bullet Points für bessere Lesbarkeit auf dunklem Hintergrund */
+        }
+
 
         /* Regeln für das Profilbild */
         .profile-image-wrapper {
@@ -175,40 +170,142 @@
             color: #444444; /* Listenpunkte in Sektionen dunkler Grau */
         }
         /* Links in der linken Spalte */
-        .left-column-sticky a {
-            color: #e0e0e0; /* Links in linker Spalte heller */
+        /* Diese Regeln wurden durch direkte Tailwind-Klassen im HTML ersetzt */
+        /* .left-column-sticky a {
+            color: #FFFFFF;
         }
         .left-column-sticky a:hover {
-            color: #ffffff; /* Links in linker Spalte beim Hover weiß */
+            color: #F0F0F0;
+        } */
+
+        /* Anpassungen für Druckansicht (für PDF-Generierung) */
+        @media print {
+            body {
+                background-color: #FFFFFF !important; /* Sicherstellen, dass der Hintergrund weiß bleibt */
+                font-size: 10pt; /* Kleinere Schrift für den Druck */
+            }
+            .main-content-card {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                width: auto !important; /* Auto-Breite, um sich an die Seitenränder anzupassen */
+                max-width: none !important; /* Keine maximale Breite */
+                margin: 0 !important; /* Keine zusätzlichen Margins */
+                padding: 0 !important; /* Kein Padding hier, da @page margin gesetzt ist */
+                display: block !important;
+                flex-direction: column !important;
+            }
+
+            /* Spalten für den Druck stapeln und volle Breite einnehmen */
+            .lg\:w-1\/3, .lg\:w-2\/3 {
+                width: 100% !important;
+                padding: 0.5cm 0 !important; /* Etwas vertikales Padding für Abschnitte, kein horizontales */
+            }
+
+            .left-column-sticky {
+                position: static !important;
+                margin-bottom: 1cm !important; /* Abstand unter dem Header-Bereich */
+                padding-top: 0.5cm !important; /* Etwas Padding oben für den Header-Bereich */
+                padding-bottom: 0.5cm !important; /* Etwas Padding unten für den Header-Bereich */
+                padding-left: 0 !important; /* Kein Padding von p-8 für Print */
+                padding-right: 0 !important; /* Kein Padding von p-8 für Print */
+                text-align: left !important; /* Text im Header linksbündig für Print */
+                align-items: flex-start !important; /* Elemente im Header linksbündig für Print */
+            }
+            .left-column-sticky h1,
+            .left-column-sticky p {
+                text-align: left !important; /* Sicherstellen, dass der Text im Header linksbündig ist */
+            }
+            .left-column-sticky .w-24 { /* Die Akzentlinie */
+                margin-left: 0 !important; /* Links ausrichten */
+            }
+
+
+            /* Animationen/Übergänge für den Druck entfernen */
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            /* Sicherstellen, dass Textfarben lesbar sind */
+            .header-bg {
+                background-color: #333333 !important;
+                color: #ffffff !important;
+            }
+            .accent-color {
+                color: #BE3175 !important;
+            }
+            section h3 {
+                color: #333333 !important;
+            }
+            section p.text-gray-600 {
+                color: #666666 !important;
+            }
+            section ul.text-gray-700 li {
+                color: #444444 !important;
+            }
+            .left-column-sticky a {
+                color: #ffffff !important; /* Links in linker Spalte im Druck weiß */
+            }
+            .left-column-sticky a:hover {
+                color: #F0F0F0 !important;
+            }
+
+            /* Sicherstellen, dass der Profilbild-Zoom erhalten bleibt und keine interaktiven Elemente sichtbar sind */
+            .profile-image-wrapper {
+                box-shadow: none !important;
+                animation: none !important;
+                width: 150px !important; /* Kleinere Größe für das Bild im Print-Header */
+                height: 150px !important;
+                margin-bottom: 0.5cm !important;
+            }
+            .profile-image {
+                transform: scale(2.2) !important; /* Zoom beibehalten */
+                transition: none !important;
+            }
+
+            /* Interaktive Elemente ausblenden */
+            #hire-me-banner {
+                display: none !important;
+            }
+            .clicked-glow, .idle-subtle-glow {
+                animation: none !important;
+            }
+
+            /* Ensure sections don't break across pages awkwardly */
+            section {
+                page-break-inside: avoid;
+            }
+            h2.section-heading {
+                page-break-after: avoid;
+            }
         }
     </style>
 </head>
 <body class="flex justify-center">
     <div class="main-content-card rounded-lg w-full max-w-5xl lg:flex">
         
-        <div class="lg:w-1/3 p-8 header-bg text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
+        <div class="left-column lg:w-1/3 p-8 bg-gray-800 text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
             <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
                 <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
                 <div id="hire-me-banner" class="hire-me-banner">HIRE ME!</div>
             </div>
             
             <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
-            <p class="text-lg font-light mb-8">Bildungsexperte & Politikwissenschaftler</p>
+            <p class="text-lg font-light mb-8 text-white text-center">Bildungsexperte & Politikwissenschaftler</p>
             
             <div class="w-full mb-8">
-                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kontakt</h2>
-                <ul class="space-y-2 text-sm">
-                    <li>📍 Kardinal Galen Straße 44, 47051 Duisburg</li>
-                    <li>📞 <a href="tel:+4917691360115" class="underline hover:text-gray-200">(+49) 176 91360115</a></li>
-                    <li>✉️ <a href="mailto:yannik.brand.work@gmail.com" class="underline hover:text-gray-200">yannik.brand.work@gmail.com</a></li>
-                    <li>🌐 <a href="[Link zu deinem Online-Portfolio/Website]" target="_blank" class="underline hover:text-gray-200">Online-Portfolio</a></li>
-                </ul>
+                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kontakt</h2>
+                <ul class="space-y-2 text-sm text-white">
+                    <li><i class="fa-solid fa-location-dot mr-2"></i> Kardinal Galen Straße 44, 47051 Duisburg</li>
+                    <li><i class="fa-solid fa-phone mr-2"></i> <a href="tel:+4917691360115" class="underline hover:text-white text-white">(+49) 176 91360115</a></li>
+                    <li><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:yannik.brand.work@gmail.com" class="underline hover:text-white text-white">yannik.brand.work@gmail.com</a></li>
+                    </ul>
             </div>
 
             <div class="w-full">
-                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2">Kurzprofil</h2>
-                <p class="text-sm leading-relaxed">
-                    <strong>Engagierter Bildungsexperte und Projektmanager</strong> mit 4 Jahren Praxis in Projektmanagement, Marketing und Lehre. Ich konzipiere und realisiere wirkungsvolle Bildungsmaßnahmen und Events. Mein <strong>Master in European Culture and Economy</strong> und ausgeprägtes Interesse an gesellschaftlichen Bildungsprozessen ermöglichen es mir, politische Inhalte zielgruppengerecht und digital aufzubereiten. Als Digital Native stärke ich die digitale Präsenz der DGB Jugend NRW durch Social Media, Content Creation und Community Building.
+                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kurzprofil</h2>
+                <p class="text-sm leading-relaxed text-white">
+                    <strong>Engagierter Projektmanager und Pädagoge</strong> mit über 4 Jahren Erfahrung im Projektmanagement, Marketing und 6 Jahren Lehre. Ich konzipiere und realisiere wirkungsvolle Bildungsmaßnahmen und Events. Mein <strong>Master in European Culture and Economy</strong> und meine Affinität für digitale Bildung ermöglichen es mir, politische Inhalte zielgruppengerecht aufzubereiten und die digitale Präsenz der DGB Jugend NRW zu stärken.
                 </p>
             </div>
         </div>
@@ -220,30 +317,30 @@
                         <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
                         <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) & Berufskolleg am Haspel, Wuppertal | 09/2018 – 02/2025</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Pädagogische Vermittlung: Konzeption, didaktische Aufbereitung und Durchführung von Lehrinhalten in Geschichte, Politik, Wirtschaft und Englisch, um komplexe Themen verständlich an diverse Zielgruppen zu vermitteln.</li>
-                            <li class="bullet-point-icon">Entwicklung von Lehrstrategien und Curriculum: Adaption von Lehr- und Lernmaterialien sowie Förderung kritischen Denkens und aktiver Beteiligung.</li>
+                            <li class="bullet-point-icon">Konzeption & didaktische Vermittlung komplexer Lehrinhalte (Geschichte, Politik, Wirtschaft, Englisch).</li>
+                            <li class="bullet-point-icon">Entwicklung von Lehrstrategien & Curricula; Förderung kritischen Denkens & Beteiligung.</li>
                             <li class="bullet-point-icon">Gruppenleitung & Moderation: Aktive Begleitung und Anleitung von Gruppen, Förderung von Diskussionen und konstruktiver Zusammenarbeit.</li>
-                            <li class="bullet-point-icon">Organisation & Planung: Eigenverantwortliche Planung und Durchführung von Unterrichtseinheiten und schulinternen Projekten.</li>
+                            <li class="bullet-point-icon">Eigenverantwortliche Planung & Durchführung von Unterrichtseinheiten & Projekten.</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Projektmanager & Marketingverantwortlicher</h3>
-                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 2014 – 2018</p>
+                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 05/2014 – 07/2018</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Projektkoordination: Verantwortlich für Konzeptentwicklung, Abwicklung und Monitoring vielfältiger Projekte, oft mit Bildungs- oder Eventcharakter.</li>
-                            <li class="bullet-point-icon">Budgetverwaltung: Eigenständige finanzielle Planung und Überwachung von Projektbudgets sowie Kalkulation von Maßnahmen.</li>
-                            <li class="bullet-point-icon">Partnerkommunikation: Aufbau und Pflege von Beziehungen zu internen und externen Projektpartnern sowie Stakeholdern.</li>
-                            <li class="bullet-point-icon">Organisatorische Verantwortung: Koordination logistischer und administrativer Abläufe für Veranstaltungen und Workshops.</li>
-                            <li class="bullet-point-icon">Marketing & Reichweite: Entwicklung und Umsetzung von Maßnahmen zur Bewerbung von Projekten und zur Teilnehmenden-Akquisition.</li>
+                            <li class="bullet-point-icon">Projektkoordination: Konzeptentwicklung, Abwicklung & Monitoring vielfältiger Projekte (oft mit Bildungs- oder Eventcharakter).</li>
+                            <li class="bullet-point-icon">Budgetverwaltung: Eigenständige Finanzplanung, Budgetüberwachung & Kalkulation von Maßnahmen.</li>
+                            <li class="bullet-point-icon">Partnerkommunikation: Aufbau & Pflege von Beziehungen zu internen und externen Projektpartnern sowie Stakeholdern.</li>
+                            <li class="bullet-point-icon">Organisatorische Verantwortung: Koordination logistischer & administrativer Abläufe für Veranstaltungen & Workshops.</li>
+                            <li class="bullet-point-icon">Marketing & Reichweite: Entwicklung & Umsetzung von Maßnahmen zur Bewerbung von Projekten & zur Teilnehmenden-Akquisition.</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Praktikant Stabsstelle für Europaangelegenheiten</h3>
                         <p class="text-gray-600 text-sm mb-1">Stadt Essen | 01/2024 – 03/2024</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Unterstützung bei der Kommunikation und Koordination europäischer Angelegenheiten im öffentlichen Sektor.</li>
-                            <li class="bullet-point-icon">Einblicke in die Verwaltungskommunikation und die Aufbereitung politischer Inhalte.</li>
-                            <li class="bullet-point-icon">Mitarbeit an der Konzeption und Durchführung von Aktionen im Rahmen der Ruhr-Europakampagne "Lets Europe".</li>
+                            <li class="bullet-point-icon">Unterstützung bei der Kommunikation & Koordination europäischer Angelegenheiten im öffentlichen Sektor.</li>
+                            <li class="bullet-point-icon">Einblicke in die Verwaltungskommunikation & die Aufbereitung politischer Inhalte.</li>
+                            <li class="bullet-point-icon">Mitarbeit an Konzeption & Durchführung von Aktionen (Ruhr-Europakampagne "Lets Europe").</li>
                         </ul>
                     </div>
                 </div>
@@ -256,15 +353,14 @@
                         <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 10/2021 – 03/2024</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
                             <li class="bullet-point-icon">Schwerpunkte: Europäische Politik, Förderstrukturen, Transformationsprozesse, Policy-Analysen.</li>
-                            <li class="bullet-point-icon">Vertiefung in der Analyse komplexer gesellschaftlicher und politischer Themen, relevant für die Konzeption und Evaluation von Bildungsangeboten.</li>
+                            <li class="bullet-point-icon">Analyse komplexer gesellschaftlicher & politischer Themen (relevant für Konzeption & Evaluation von Bildungsangeboten).</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold">B.A. 2 - Fach Bachelor of Arts Englisch und Geschichte</h3>
+                        <h3 class="text-lg font-semibold">B.A. 2-Fach Bachelor of Arts Englisch und Geschichte</h3>
                         <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 04/2011 – 03/2021</p>
                         <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Stärkung analytischer und textlicher Fähigkeiten durch wissenschaftliches Arbeiten und Diskursanalyse.</li>
-                            <li class="bullet-point-icon">Vertieftes geschichtliches und kulturelles Wissen zur Perspektivenerfassung und Problemlösung.</li>
+                            <li class="bullet-point-icon">Stärkung analytischer & textlicher Fähigkeiten durch wissenschaftliches Arbeiten & Diskursanalyse.</li>
                         </ul>
                     </div>
                 </div>
@@ -273,9 +369,9 @@
             <section> <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
                 <div class="space-y-4 text-sm text-gray-700">
                     <div>
-                        <h3 class="font-semibold mb-1">Organisation & Koordination:</h3>
+                        <h3 class="font-semibold mb-1">Organisation, Koordination & Kommunikation:</h3>
                         <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Ausgeprägte Fähigkeit zu organisieren, Terminmanagement, Projektmanagement, Veranstaltungsplanung.</li>
+                            <li class="bullet-point-icon">Ausgeprägte Fähigkeit zu organisieren, Termin- und Projektmanagement sowie Veranstaltungsplanung.</li>
                         </ul>
                     </div>
                     <div>
@@ -287,20 +383,13 @@
                     <div>
                         <h3 class="font-semibold mb-1">Digitale Tools:</h3>
                         <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">MS Office 365 (Word, Excel, PowerPoint, Outlook)</li>
-                            <li class="bullet-point-icon">Cloud-Kollaborationstools (z.B. MS Teams, Slack)</li>
-                            <li class="bullet-point-icon">Figma/Canva (Grundkenntnisse für Materialerstellung)</li>
-                            <li class="bullet-point-icon">GitHub (Grundkenntnisse)</li>
-                            <li class="bullet-point-icon">HTML (Grundkenntnisse)</li>
-                            <li class="bullet-point-icon">LibreOffice</li>
-                            <li class="bullet-point-icon">R (Grundkenntnisse)</li>
-                            <li class="bullet-point-icon">MAXQDA</li>
+                            <li class="bullet-point-icon">MS Office 365 (Word, Excel, PowerPoint, Outlook), Cloud-Kollaborationstools (z.B. MS Teams, Slack), Figma/Canva/Adobe Suite.</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
                         <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Schnelle Einarbeitung in neue Themenfelder, Evaluationskompetenz, Datenanalyse, Recherche auf einem hohen akademischen Level.</li>
+                            <li class="bullet-point-icon">Schnelle Einarbeitung in neue Themenfelder, Evaluationskompetenz, Datenanalyse.</li>
                         </ul>
                     </div>
                     <div>
@@ -333,94 +422,93 @@
     </div>
 
     <script>
-        let clickCount = 0;
-        const profileImageContainer = document.getElementById('profile-image-container'); // Wrapper for the image
-        const profileImage = document.getElementById('profile-image'); // The image itself
-        const hireMeBanner = document.getElementById('hire-me-banner');
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileImageContainer = document.getElementById('profile-image-container'); // Wrapper for the image
+            const profileImage = profileImageContainer.querySelector('img');
+            const hireMeBanner = document.getElementById('hire-me-banner');
+            let clickCount = 0;
+            const defaultScale = 1.4; // Initial scale of the image
+            const hoverScale = 1.6; // Scale on mouse hover
+            const clickZoomLevels = [1.9, 2.1, 2.3, 2.5]; // These are absolute scales for progressive zoom
 
-        // Define zoom levels for clicks
-        const clickZoomLevels = [1.9, 2.1, 2.3, 2.5]; // These are absolute scales
+            let currentZoomTimeout;
 
-        const defaultScale = 1.4; // Initial scale of the image
-        const hoverScale = 1.6; // Scale on mouse hover
+            // Set initial scale on load
+            profileImage.style.transform = `scale(${defaultScale})`;
 
-        let currentZoomTimeout = null;
+            if (profileImageContainer && profileImage) {
+                // Mouseenter event for hover zoom
+                profileImageContainer.addEventListener('mouseenter', () => {
+                    // Only apply hover zoom if no click-zoom is currently active
+                    // (i.e., no specific scale set by a click that hasn't reset yet)
+                    if (profileImage.style.transform === `scale(${defaultScale})` || profileImage.style.transform === '') {
+                        profileImage.style.transform = `scale(${hoverScale})`;
+                    }
+                    // Pause the idle glow animation
+                    profileImageContainer.style.animationPlayState = 'paused';
+                });
 
-        // Set initial scale on load
-        profileImage.style.transform = `scale(${defaultScale})`;
-
-        if (profileImageContainer && profileImage) {
-            // Mouseenter event for hover zoom
-            profileImageContainer.addEventListener('mouseenter', () => {
-                // Only apply hover zoom if no click-zoom is currently active
-                // (i.e., no specific scale set by a click that hasn't reset yet)
-                if (profileImage.style.transform === `scale(${defaultScale})` || profileImage.style.transform === '') {
-                    profileImage.style.transform = `scale(${hoverScale})`;
-                }
-                // Pause the idle glow animation
-                profileImageContainer.style.animationPlayState = 'paused';
-            });
-
-            // Mouseleave event to revert from hover zoom
-            profileImageContainer.addEventListener('mouseleave', () => {
-                // Only revert from hover if no click-zoom is currently active
-                if (profileImage.style.transform === `scale(${hoverScale})`) {
-                    profileImage.style.transform = `scale(${defaultScale})`;
-                }
-                // Resume the idle glow animation
-                profileImageContainer.style.animationPlayState = 'running';
-            });
+                // Mouseleave event to revert from hover zoom
+                profileImageContainer.addEventListener('mouseleave', () => {
+                    // Only revert from hover if no click-zoom is currently active
+                    if (profileImage.style.transform === `scale(${hoverScale})`) {
+                        profileImage.style.transform = `scale(${defaultScale})`;
+                    }
+                    // Resume the idle glow animation
+                    profileImageContainer.style.animationPlayState = 'running';
+                });
 
 
-            profileImageContainer.addEventListener('click', () => {
-                clickCount++;
+                profileImageContainer.addEventListener('click', () => {
+                    clickCount++;
 
-                // Apply click glow effect to the wrapper
-                profileImageContainer.classList.add('clicked-glow');
-                setTimeout(() => {
-                    profileImageContainer.classList.remove('clicked-glow');
-                }, 500); // Duration of the glow animation
+                    // Apply click glow effect to the wrapper
+                    profileImageContainer.classList.add('clicked-glow');
+                    setTimeout(() => {
+                        profileImageContainer.classList.remove('clicked-glow');
+                    }, 500); // Duration of the glow animation
 
-                // Apply progressive zoom based on click count
-                if (clickCount <= clickZoomLevels.length) {
-                    profileImage.style.transform = `scale(${clickZoomLevels[clickCount - 1]})`;
-                } else {
-                    // If more clicks than defined levels, maintain max zoom
-                    profileImage.style.transform = `scale(${clickZoomLevels[clickZoomLevels.length - 1]})`;
-                }
+                    // Apply progressive zoom based on click count
+                    if (clickCount <= clickZoomLevels.length) {
+                        profileImage.style.transform = `scale(${clickZoomLevels[clickCount - 1]})`;
+                    } else {
+                        // If more clicks than defined levels, maintain max zoom
+                        profileImage.style.transform = `scale(${clickZoomLevels[clickZoomLevels.length - 1]})`;
+                    }
 
-                // Clear any existing timeout for zoom reset
-                if (currentZoomTimeout) {
-                    clearTimeout(currentZoomTimeout);
-                }
-
-                // Set a timeout to reset zoom after 2 seconds, unless another click happens
-                // This timeout is only set if the banner is NOT about to appear
-                if (clickCount < 4) {
-                    currentZoomTimeout = setTimeout(() => {
-                        profileImage.style.transform = `scale(${defaultScale})`; // Revert to default scale
-                    }, 2000); // Zoom fades back after 2 seconds
-                }
-
-                // Show and fade out "Hire Me!" banner after 4 clicks
-                if (clickCount >= 4) {
-                    hireMeBanner.classList.add('hire-me-active');
-                    // Clear any pending zoom reset timeout
+                    // Clear any existing timeout for zoom reset
                     if (currentZoomTimeout) {
                         clearTimeout(currentZoomTimeout);
                     }
-                    setTimeout(() => {
-                        hireMeBanner.classList.remove('hire-me-active');
-                        hireMeBanner.classList.add('hire-me-fading-out'); // Add fading out class
+
+                    // Set a timeout to reset zoom after 2 seconds, unless another click happens
+                    // This timeout is only set if the banner is NOT about to appear
+                    if (clickCount < 4) {
+                        currentZoomTimeout = setTimeout(() => {
+                            profileImage.style.transform = `scale(${defaultScale})`; // Revert to default scale
+                        }, 2000); // Zoom fades back after 2 seconds
+                    }
+
+                    // Show and fade out "Hire Me!" banner after 4 clicks
+                    if (clickCount >= 4) {
+                        hireMeBanner.classList.add('hire-me-active');
+                        // Clear any pending zoom reset timeout
+                        if (currentZoomTimeout) {
+                            clearTimeout(currentZoomTimeout);
+                        }
                         setTimeout(() => {
-                            hireMeBanner.classList.remove('hire-me-fading-out'); // Remove after animation
-                            clickCount = 0; // Reset click count after banner fades out
-                            profileImage.style.transform = `scale(${defaultScale})`; // Ensure image resets to default
-                        }, 500); // Duration of the fade-out animation
-                    }, 1000); // Banner stays active for 1 second
-                }
-            });
-        }
+                            hireMeBanner.classList.remove('hire-me-active');
+                            hireMeBanner.classList.add('hire-me-fading-out'); // Add fading out class
+                            setTimeout(() => {
+                                hireMeBanner.classList.remove('hire-me-fading-out'); // Remove after animation
+                                clickCount = 0; // Reset click count after banner fades out
+                                profileImage.style.transform = `scale(${defaultScale})`; // Ensure image resets to default
+                            }, 500); // Duration of the fade-out animation
+                        }, 1000); // Banner stays active for 1 second
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
