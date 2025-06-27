@@ -426,4 +426,155 @@
                         <ul class="list-none pl-4 space-y-1">
                             <li class="bullet-point-icon">Texten (Web, Social Media, Pressemitteilungen), Bildbearbeitung (Canva, Figma), grundlegende Videobearbeitung.</li>
                         </ul>
-                    </d
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Webanalyse:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Google Analytics, Auswertung von Social Media Insights zur Performance-Optimierung.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Projektmanagement:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Planung, Koordination und Steuerung von Projekten, Stakeholder-Management.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Kommunikation:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Exzellente mündliche und schriftliche Kommunikationsfähigkeiten, Präsentation, Moderation.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Datenanalyse, Problemlösung, schnelle Einarbeitung in neue Themenfelder.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Sprachen:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">Deutsch (Muttersprache), Englisch (Fließend in Wort und Schrift).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Tools:</h3>
+                        <ul class="list-none pl-4 space-y-1">
+                            <li class="bullet-point-icon">MS Office (Word, Excel, PowerPoint), Google Workspace, Figma, Canva, [ggf. weitere Social Media Management Tools wie Hootsuite, Buffer, Sprout Social etc. hinzufügen].</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section> <h2 class="text-2xl font-semibold section-heading accent-color">Interessen & Engagement</h2>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Ausgeprägtes Interesse an politischer Kommunikation und gesellschaftlichen Debatten, insbesondere im Kontext linker Politik.</li>
+                                <li class="bullet-point-icon">Bereitschaft zur flexiblen Arbeitszeitgestaltung, einschließlich Abend- und Wochenendterminen.</li>
+                                <li class="bullet-point-icon">Sehr große Identifikation mit der Partei die Linke (Mitglied) und Interesse an neuesten linken politischen Trends und Theorien.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Navigationspfeil -->
+        <a href="sharepics.html" class="nav-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileImageContainer = document.getElementById('profile-image-container'); // Wrapper for the image
+            const profileImage = profileImageContainer.querySelector('img');
+            const hireMeBanner = document.getElementById('hire-me-banner');
+            let clickCount = 0;
+            const defaultScale = 1.4; // Initial scale of the image
+            const hoverScale = 1.6; // Scale on mouse hover
+            const clickZoomLevels = [1.9, 2.1, 2.3, 2.5]; // These are absolute scales for progressive zoom
+
+            let currentZoomTimeout;
+
+            // Set initial scale on load
+            profileImage.style.transform = `scale(${defaultScale})`;
+
+            if (profileImageContainer && profileImage) {
+                // Mouseenter event for hover zoom
+                profileImageContainer.addEventListener('mouseenter', () => {
+                    // Only apply hover zoom if no click-zoom is currently active
+                    // (i.e., no specific scale set by a click that hasn't reset yet)
+                    if (profileImage.style.transform === `scale(${defaultScale})` || profileImage.style.transform === '') {
+                        profileImage.style.transform = `scale(${hoverScale})`;
+                    }
+                    // Pause the idle glow animation
+                    profileImageContainer.style.animationPlayState = 'paused';
+                });
+
+                // Mouseleave event to revert from hover zoom
+                profileImageContainer.addEventListener('mouseleave', () => {
+                    // Only revert from hover if no click-zoom is currently active
+                    if (profileImage.style.transform === `scale(${hoverScale})`) {
+                        profileImage.style.transform = `scale(${defaultScale})`;
+                    }
+                    // Resume the idle glow animation
+                    profileImageContainer.style.animationPlayState = 'running';
+                });
+
+
+                profileImageContainer.addEventListener('click', () => {
+                    clickCount++;
+
+                    // Apply click glow effect to the wrapper
+                    profileImageContainer.classList.add('clicked-glow');
+                    setTimeout(() => {
+                        profileImageContainer.classList.remove('clicked-glow');
+                    }, 500); // Duration of the glow animation
+
+                    // Apply progressive zoom based on click count
+                    if (clickCount <= clickZoomLevels.length) {
+                        profileImage.style.transform = `scale(${clickZoomLevels[clickCount - 1]})`;
+                    } else {
+                        // If more clicks than defined levels, maintain max zoom
+                        profileImage.style.transform = `scale(${clickZoomLevels[clickZoomLevels.length - 1]})`;
+                    }
+
+                    // Clear any existing timeout for zoom reset
+                    if (currentZoomTimeout) {
+                        clearTimeout(currentZoomTimeout);
+                    }
+
+                    // Set a timeout to reset zoom after 2 seconds, unless another click happens
+                    // This timeout is only set if the banner is NOT about to appear
+                    if (clickCount < 4) {
+                        currentZoomTimeout = setTimeout(() => {
+                            profileImage.style.transform = `scale(${defaultScale})`; // Revert to default scale
+                        }, 2000); // Zoom fades back after 2 seconds
+                    }
+
+                    // Show and fade out "Hire Me!" banner after 4 clicks
+                    if (clickCount >= 4) {
+                        hireMeBanner.classList.add('hire-me-active');
+                        // Clear any pending zoom reset timeout
+                        if (currentZoomTimeout) {
+                            clearTimeout(currentZoomTimeout);
+                        }
+                        setTimeout(() => {
+                            hireMeBanner.classList.remove('hire-me-active');
+                            hireMeBanner.classList.add('hire-me-fading-out'); // Add fading out class
+                            setTimeout(() => {
+                                hireMeBanner.classList.remove('hire-me-fading-out'); // Remove after animation
+                                clickCount = 0; // Reset click count after banner fades out
+                                profileImage.style.transform = `scale(${defaultScale})`; // Ensure image resets to default
+                            }, 500); // Duration of the fade-out animation
+                        }, 1000); // Banner stays active for 1 second
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
