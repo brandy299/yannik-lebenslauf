@@ -15,7 +15,7 @@
             background-color: #314251; /* Dunkelblau-grauer Hintergrund aus dem Bild */
             color: #f4f4f4;
             margin: 0;
-            padding: 20px; /* Standard-Padding für kleinere Bildschirme */
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -23,6 +23,7 @@
             min-height: 100vh;
             box-sizing: border-box;
             overflow-x: hidden;
+            position: relative; /* For the fixed arrow */
         }
 
         /* Anpassung des Body-Padding für größere Bildschirme */
@@ -34,6 +35,7 @@
 
         :root {
             --primary-linke-red: #E4002B; /* Das Linke Rot */
+            --primary-linke-red-rgb: 228, 0, 43; /* RGB Werte für rgba() */
         }
 
         .image-container {
@@ -92,15 +94,82 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Anpassungen */
+        /* Navigationspfeil */
+        .nav-arrow {
+            position: fixed; /* Fixiert am Viewport */
+            right: 20px; /* Abstand vom rechten Rand */
+            top: 50%;
+            transform: translateY(-50%); /* Zentriert vertikal */
+            background-color: var(--primary-linke-red);
+            color: white;
+            padding: 20px; /* Größerer Pfeil */
+            border-radius: 50%; /* Rund */
+            font-size: 1.8em; /* Größerer Pfeil */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            z-index: 100; /* Über allen anderen Inhalten */
+            animation: float-arrow 2s ease-in-out infinite alternate; /* Floating-Animation */
+        }
+
+        @keyframes float-arrow {
+            0% { transform: translateY(-50%) translateX(0px); }
+            50% { transform: translateY(-58%) translateX(0px); } /* Leichte vertikale Bewegung */
+            100% { transform: translateY(-50%) translateX(0px); }
+        }
+
+        .nav-arrow:hover {
+            background-color: #C20024; /* Dunkleres Rot beim Hover */
+            transform: translateY(-50%) scale(1.1); /* Leichter Zoom und zentriert bleiben */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            animation-play-state: paused; /* Animation beim Hover pausieren */
+        }
+        
+        /* Hinweis für den Pfeil */
+        .nav-arrow-hint {
+            position: absolute;
+            right: calc(100% + 15px); /* Positioniert links neben dem Pfeil */
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            white-space: nowrap; /* Verhindert Zeilenumbruch */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .nav-arrow:hover .nav-arrow-hint {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsivität für den Pfeil und Hinweis */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                right: 10px;
+                padding: 10px;
+                font-size: 1.2em;
+            }
+            .nav-arrow-hint {
+                display: none; /* Hinweis auf kleinen Bildschirmen ausblenden */
+            }
+        }
+
+
+        /* Responsive Anpassungen für die Seite */
         @media (max-width: 768px) {
             .image-container {
-                max-width: 100%; /* Volle Breite auf kleineren Bildschirmen */
-                border-radius: 0; /* Keine Abrundung auf kleinen Bildschirmen */
-                box-shadow: none; /* Kein Schatten auf kleinen Bildschirmen */
+                max-width: 100%; 
+                border-radius: 0; 
+                box-shadow: none; 
             }
             body {
-                padding: 0; /* Kein Padding für volle Bildanzeige auf kleinen Bildschirmen */
+                padding: 0; 
             }
             .back-button {
                 font-size: 1em;
@@ -123,5 +192,31 @@
     <a href="sharepics.html" class="back-button">
         <i class="fa-solid fa-arrow-left"></i> Zurück
     </a>
+
+    <!-- Navigationspfeil zur Digital Marketing Experience Seite -->
+    <a href="digital_marketing_experience.html" class="nav-arrow" id="next-page-arrow">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span class="nav-arrow-hint">Mehr zu Digital Marketing!</span>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navArrowHint = document.getElementById('next-page-arrow').querySelector('.nav-arrow-hint');
+
+            // Initial display and fade out of hint for this page's arrow
+            setTimeout(() => {
+                if (navArrowHint) {
+                    navArrowHint.style.opacity = '1';
+                    navArrowHint.style.visibility = 'visible';
+                }
+                setTimeout(() => {
+                    if (navArrowHint) {
+                        navArrowHint.style.opacity = '0';
+                        navArrowHint.style.visibility = 'hidden';
+                    }
+                }, 3000); // Hinweis 3 Sekunden sichtbar
+            }, 2000); // Hinweis erscheint nach 2 Sekunden
+        });
+    </script>
 </body>
 </html>
