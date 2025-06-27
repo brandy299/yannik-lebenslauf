@@ -10,6 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlalTjs12kE+8r3m4D1a1B7y/j8X0+v6+7Q2Q7z7l02/7U04W4+K/7F9b9t9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+            padding: 0;
+            margin: 0;
+            line-height: 1.5;
+            display: flex; /* Für die Zentrierung des äußeren Containers */
+            justify-content: center; /* Zentriert den äußeren Container */
+            overflow-x: hidden; /* Verhindert horizontalen Scrollbalken durch Sharepics */
+        }
+
         :root {
             --primary-color: #E4002B; /* Gängiger Rotton für Die Linke */
             --text-color-dark: #333333;
@@ -19,18 +31,9 @@
             --border-color: #E0E0E0;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-color-dark);
-            padding: 0;
-            margin: 0;
-            line-height: 1.5;
-        }
-
         /* Akzentfarbe für Überschriften und Icons */
         .accent-color {
-            color: var(--primary-color); /* Verwendet die neue Primärfarbe */
+            color: var(--primary-color);
         }
         .section-heading {
             border-bottom: 2px solid var(--border-color);
@@ -42,11 +45,11 @@
             display: inline-block;
             width: 1em;
             margin-left: -1em;
-            color: var(--primary-color); /* Akzentfarbe für Aufzählungszeichen im Hauptteil */
+            color: var(--primary-color);
         }
         /* Spezifische Farbe für Bullet Points in der linken Spalte */
         .left-column .bullet-point-icon::before {
-            color: #FFFFFF; /* Weiße Bullet Points für bessere Lesbarkeit auf dunklem Hintergrund */
+            color: #FFFFFF;
         }
 
         /* Regeln für das Profilbild */
@@ -62,7 +65,7 @@
 
         @keyframes idle-subtle-glow {
             0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-            100% { box-shadow: 0 4px 6px 15px rgba(228, 0, 43, 0.6), 0 2px 4px 8px rgba(228, 0, 43, 0.3); } /* Anpassung an Die Linke Rot */
+            100% { box-shadow: 0 4px 6px 15px rgba(228, 0, 43, 0.6), 0 2px 4px 8px rgba(228, 0, 43, 0.3); }
         }
 
         .profile-image-wrapper:hover,
@@ -82,8 +85,8 @@
         }
 
         @keyframes border-glow-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(228, 0, 43, 1); } /* Anpassung an Die Linke Rot */
-            100% { box-shadow: 0 0 0 40px rgba(228, 0, 43, 0); } /* Anpassung an Die Linke Rot */
+            0% { box-shadow: 0 0 0 0 rgba(228, 0, 43, 1); }
+            100% { box-shadow: 0 0 0 40px rgba(228, 0, 43, 0); }
         }
 
         /* Hire Me Banner */
@@ -93,7 +96,7 @@
             left: 50%;
             transform: translate(-50%, 50%) scale(0.5); 
             padding: 1rem 2rem;
-            background-color: var(--primary-color); /* Anpassung an Die Linke Rot */
+            background-color: var(--primary-color);
             color: white;
             border-radius: 9999px;
             font-weight: bold;
@@ -126,12 +129,26 @@
             }
         }
 
-        /* Sektionen und Hauptcontainer bleiben hell */
+        /* Outer container for CV and Sharepics */
+        .cv-layout-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Aligns items to the top */
+            width: 100%; /* Take full width available */
+            max-width: 1600px; /* Overall max width for the entire layout (CV + Sharepics) */
+            margin: 30px auto; /* Centered with vertical margin */
+        }
+
+        /* Main CV content card */
         .main-content-card {
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border-radius: 8px;
             padding: 3rem 1rem;
+            flex-grow: 1; /* Allows it to take available space */
+            max-width: 960px; /* Keep the original max-width for the CV itself */
+            min-width: 320px; /* Ensure it doesn't get too small */
+            z-index: 2; /* Sorgt dafür, dass der CV über den Sharepics liegt */
         }
         @media (min-width: 640px) {
             .main-content-card {
@@ -170,11 +187,59 @@
             color: #444444;
         }
 
+        /* Sharepic-Stil */
+        .sharepic {
+            width: 250px; /* Feste Breite der Sharepics */
+            height: 100vh; /* Volle Höhe des Viewports */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1; /* Leichte Transparenz */
+            z-index: 1; /* Unter dem Haupt-CV-Container */
+            pointer-events: none; /* Macht sie unklickbar */
+            flex-shrink: 0; /* Verhindert, dass sie kleiner werden */
+            transition: transform 0.3s ease-in-out; /* Übergang für Mouseover-Effekt */
+        }
+
+        .sharepic:hover {
+            opacity: 0.2; /* Etwas weniger transparent auf Hover */
+            transform: scale(1.05); /* Leichter Zoom-Effekt */
+        }
+        
+        .sharepic-left {
+            margin-right: 20px; /* Abstand zwischen linkem Sharepic und CV */
+            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpg');
+        }
+
+        .sharepic-right {
+            margin-left: 20px; /* Abstand zwischen rechtem Sharepic und CV */
+            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370123.jpg');
+            transform: scaleX(-1); /* Spiegeln des Bildes */
+        }
+        .sharepic-right:hover {
+            transform: scale(1.05) scaleX(-1); /* Kombiniert Zoom und Spiegelung */
+        }
+
+        /* Responsivität für Sharepics */
+        @media (max-width: 1200px) { /* Blendet Sharepics auf kleineren Bildschirmen aus */
+            .sharepic {
+                display: none;
+            }
+            .cv-layout-wrapper {
+                max-width: 960px; /* Ohne Sharepics passt der CV wieder in 960px */
+            }
+        }
+
         /* Anpassungen für Druckansicht (für PDF-Generierung) */
         @media print {
             body {
                 background-color: #FFFFFF !important;
                 font-size: 10pt;
+                display: block !important; /* Deaktiviert Flexbox für den Druck */
+            }
+            .cv-layout-wrapper {
+                max-width: none !important;
+                margin: 0 !important;
+                display: block !important; /* Deaktiviert Flexbox für den Druck */
             }
             .main-content-card {
                 box-shadow: none !important;
@@ -201,7 +266,7 @@
                 padding-right: 0 !important;
                 text-align: left !important;
                 align-items: flex-start !important;
-                background-color: #E4002B !important; /* Anpassung an Die Linke Rot im Druck */
+                background-color: #E4002B !important;
             }
             .left-column-sticky h1,
             .left-column-sticky p {
@@ -221,7 +286,7 @@
                 color: #ffffff !important;
             }
             .accent-color {
-                color: #E4002B !important; /* Anpassung an Die Linke Rot im Druck */
+                color: #E4002B !important;
             }
             section h3 {
                 color: #333333 !important;
@@ -258,6 +323,11 @@
                 animation: none !important;
             }
 
+            /* Sharepics im Druck ausblenden */
+            .sharepic {
+                display: none !important;
+            }
+
             section {
                 page-break-inside: avoid;
             }
@@ -267,165 +337,173 @@
         }
     </style>
 </head>
-<body class="flex justify-center">
-    <div class="main-content-card rounded-lg w-full max-w-5xl lg:flex">
-        
-        <div class="left-column lg:w-1/3 p-8 bg-gray-800 text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
-            <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
-                <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
-                <div id="hire-me-banner" class="hire-me-banner">HIRE ME!</div>
-            </div>
+<body>
+    <div class="cv-layout-wrapper">
+        <!-- Linkes Sharepic -->
+        <div class="sharepic sharepic-left"></div>
+
+        <div class="main-content-card rounded-lg w-full lg:flex">
             
-            <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
-            <p class="text-lg font-light mb-8 text-white text-center">Bildungsexperte & Politikwissenschaftler</p>
-            
-            <div class="w-full mb-8">
-                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kontakt</h2>
-                <ul class="space-y-2 text-sm text-white">
-                    <li><i class="fa-solid fa-location-dot mr-2"></i> Kardinal Galen Straße 44, 47051 Duisburg</li>
-                    <li><i class="fa-solid fa-phone mr-2"></i> <a href="tel:+4917691360115" class="underline hover:text-white text-white">(+49) 176 91360115</a></li>
-                    <li><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:yannik.brand.work@gmail.com" class="underline hover:text-white text-white">yannik.brand.work@gmail.com</a></li>
-                    <li><i class="fa-solid fa-link mr-2"></i> <a href="https://brandy299.github.io/yannik-lebenslauf/" target="_blank" class="underline hover:text-white text-white">Online-Portfolio</a></li>
-                    </ul>
+            <div class="left-column lg:w-1/3 p-8 bg-gray-800 text-white flex flex-col items-center text-center lg:text-left lg:items-start left-column-sticky">
+                <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
+                    <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
+                    <div id="hire-me-banner" class="hire-me-banner">HIRE ME!</div>
+                </div>
+                
+                <h1 class="text-4xl font-bold mb-2">Yannik Brand</h1>
+                <p class="text-lg font-light mb-8 text-white text-center">Bildungsexperte & Politikwissenschaftler</p>
+                
+                <div class="w-full mb-8">
+                    <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kontakt</h2>
+                    <ul class="space-y-2 text-sm text-white">
+                        <li><i class="fa-solid fa-location-dot mr-2"></i> Kardinal Galen Straße 44, 47051 Duisburg</li>
+                        <li><i class="fa-solid fa-phone mr-2"></i> <a href="tel:+4917691360115" class="underline hover:text-white text-white">(+49) 176 91360115</a></li>
+                        <li><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:yannik.brand.work@gmail.com" class="underline hover:text-white text-white">yannik.brand.work@gmail.com</a></li>
+                        <li><i class="fa-solid fa-link mr-2"></i> <a href="https://brandy299.github.io/yannik-lebenslauf/" target="_blank" class="underline hover:text-white text-white">Online-Portfolio</a></li>
+                        </ul>
+                </div>
+
+                <div class="w-full">
+                    <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kurzprofil</h2>
+                    <p class="text-sm leading-relaxed text-white">
+                        Engagierter Kommunikationsprofi mit mehrjähriger Erfahrung im <strong>Projektmanagement, Marketing und in der digitalen Kommunikation</strong>. Ausgeprägte Fähigkeiten in der <strong>Konzeption und Umsetzung von Kommunikationsstrategien</strong>, insbesondere im Bereich Social Media und Content-Erstellung. Leidenschaft für die Vermittlung komplexer Inhalte und den Aufbau von Communities. Versiert im Umgang mit digitalen Tools und Analyseplattformen, bereit, sich schnell in neue Themenfelder einzuarbeiten und innovative Ansätze für die politische Kommunikation zu entwickeln.
+                    </p>
+                </div>
             </div>
 
-            <div class="w-full">
-                <h2 class="text-xl font-semibold mb-4 border-b border-gray-500 pb-2 text-white">Kurzprofil</h2>
-                <p class="text-sm leading-relaxed text-white">
-                    Engagierter Kommunikationsprofi mit mehrjähriger Erfahrung im <strong>Projektmanagement, Marketing und in der digitalen Kommunikation</strong>. Ausgeprägte Fähigkeiten in der <strong>Konzeption und Umsetzung von Kommunikationsstrategien</strong>, insbesondere im Bereich Social Media und Content-Erstellung. Leidenschaft für die Vermittlung komplexer Inhalte und den Aufbau von Communities. Versiert im Umgang mit digitalen Tools und Analyseplattformen, bereit, sich schnell in neue Themenfelder einzuarbeiten und innovative Ansätze für die politische Kommunikation zu entwickeln.
-                </p>
+            <div class="lg:w-2/3 p-8">
+                <section> <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
+                            <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) & Berufskolleg am Haspel, Wuppertal | 09/2018 – 02/2025</p>
+                            <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                                <li class="bullet-point-icon">Didaktische Aufbereitung und Vermittlung komplexer Inhalte für diverse Zielgruppen.</li>
+                                <li class="bullet-point-icon">Entwicklung und Durchführung von interaktiven Unterrichtseinheiten, die digitale Medien integrierten (z.B. Nutzung von Online-Tools für Präsentationen und Kollaboration).</li>
+                                <li class="bullet-point-icon">Kommunikation und Koordination mit Schülern, Eltern und Kollegen in einem dynamischen Umfeld.</li>
+                                <li class="bullet-point-icon">Projektorientiertes Arbeiten und eigenverantwortliche Planung von Lehrinhalten.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Projektmanager & Marketingverantwortlicher</h3>
+                            <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 05/2014 – 07/2018</p>
+                            <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                                <li class="bullet-point-icon">Eigenverantwortliche Konzeption, Abwicklung und Monitoring vielfältiger Projekte im Bereich Marketing und Kommunikation.</li>
+                                <li class="bullet-point-icon">Entwicklung und Umsetzung von Marketingstrategien zur Steigerung der Reichweite und Markenbekanntheit.</li>
+                                <li class="bullet-point-icon">Erstellung von Content für diverse Kanäle (Websites, Social Media, Pressemitteilungen).</li>
+                                <li class="bullet-point-icon">Koordination und Abstimmung mit internen Abteilungen und externen Partnern.</li>
+                                <li class="bullet-point-icon">Analyse von Marketingkennzahlen zur Optimierung von Kampagnen.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Praktikant Stabsstelle für Europaangelegenheiten</h3>
+                            <p class="text-gray-600 text-sm mb-1">Stadt Essen | 01/2024 – 03/2024</p>
+                            <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                                <li class="bullet-point-icon">Unterstützung bei der Kommunikation und Aufbereitung politischer Inhalte für verschiedene Zielgruppen.</li>
+                                <li class="bullet-point-icon">Einblicke in die Verwaltungskommunikation und Öffentlichkeitsarbeit.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section> <h2 class="text-2xl font-semibold section-heading accent-color">Ausbildung</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-lg font-semibold">M.A. European Culture and Economy (ECUE)</h3>
+                            <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 10/2021 – 03/2024</p>
+                            <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                                <li class="bullet-point-icon">Vertiefte Kenntnisse in gesellschaftlichen, politischen und administrativen Prozessen auf europäischer Ebene.</li>
+                                <li class="bullet-point-icon">Schärfung analytischer und interdisziplinärer Fähigkeiten zur Bearbeitung komplexer Fragestellungen.</li>
+                                <li class="bullet-point-icon">Forschung und Präsentation von Themen mit Bezug zu Kommunikation und Kultur.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">B.A. 2-Fach Bachelor of Arts Englisch und Geschichte</h3>
+                            <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 04/2011 – 03/2021</p>
+                            <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
+                                <li class="bullet-point-icon">Erwerb fundierter Kenntnisse in Textanalyse, kritischem Denken und historischer Forschung.</li>
+                                <li class="bullet-point-icon">Stärkung der schriftlichen und mündlichen Kommunikationsfähigkeiten in Deutsch und Englisch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section> <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div>
+                            <h3 class="font-semibold mb-1">Social Media Management:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Strategieentwicklung, Content-Planung, Community Management, Kampagnenführung auf gängigen Plattformen (Facebook, Instagram, Twitter/X, TikTok, YouTube).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Digitale Kommunikation:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Entwicklung von Kommunikationsstrategien, Online-Redaktion, E-Mail-Marketing.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Content Creation:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Texten (Web, Social Media, Pressemitteilungen), Bildbearbeitung (Canva, Figma), grundlegende Videobearbeitung.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Webanalyse:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Google Analytics, Auswertung von Social Media Insights zur Performance-Optimierung.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Projektmanagement:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Planung, Koordination und Steuerung von Projekten, Stakeholder-Management.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Kommunikation:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Exzellente mündliche und schriftliche Kommunikationsfähigkeiten, Präsentation, Moderation.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Datenanalyse, Problemlösung, schnelle Einarbeitung in neue Themenfelder.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Sprachen:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Deutsch (Muttersprache), Englisch (Fließend in Wort und Schrift).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-1">Tools:</h3>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">MS Office (Word, Excel, PowerPoint), Google Workspace, Figma, Canva, [ggf. weitere Social Media Management Tools wie Hootsuite, Buffer, Sprout Social etc. hinzufügen].</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section> <h2 class="text-2xl font-semibold section-heading accent-color">Interessen & Engagement</h2>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div>
+                            <ul class="list-none pl-4 space-y-1">
+                                <li class="bullet-point-icon">Ausgeprägtes Interesse an politischer Kommunikation und gesellschaftlichen Debatten, insbesondere im Kontext linker Politik.</li>
+                                <li class="bullet-point-icon">Bereitschaft zur flexiblen Arbeitszeitgestaltung, einschließlich Abend- und Wochenendterminen.</li>
+                                <li class="bullet-point-icon">Sehr große Identifikation mit der Partei die Linke (Mitglied) und Interesse an neuesten linken politischen Trends und Theorien.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
 
-        <div class="lg:w-2/3 p-8">
-            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Berufserfahrung</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="text-lg font-semibold">Lehrkraft (Englisch, Geschichte, Politik, Wirtschaft)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Gustav-Stresemann-Realschule Duisburg (u. a.) & Berufskolleg am Haspel, Wuppertal | 09/2018 – 02/2025</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Didaktische Aufbereitung und Vermittlung komplexer Inhalte für diverse Zielgruppen.</li>
-                            <li class="bullet-point-icon">Entwicklung und Durchführung von interaktiven Unterrichtseinheiten, die digitale Medien integrierten (z.B. Nutzung von Online-Tools für Präsentationen und Kollaboration).</li>
-                            <li class="bullet-point-icon">Kommunikation und Koordination mit Schülern, Eltern und Kollegen in einem dynamischen Umfeld.</li>
-                            <li class="bullet-point-icon">Projektorientiertes Arbeiten und eigenverantwortliche Planung von Lehrinhalten.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">Projektmanager & Marketingverantwortlicher</h3>
-                        <p class="text-gray-600 text-sm mb-1">GAYA Entertainment GmbH | 05/2014 – 07/2018</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Eigenverantwortliche Konzeption, Abwicklung und Monitoring vielfältiger Projekte im Bereich Marketing und Kommunikation.</li>
-                            <li class="bullet-point-icon">Entwicklung und Umsetzung von Marketingstrategien zur Steigerung der Reichweite und Markenbekanntheit.</li>
-                            <li class="bullet-point-icon">Erstellung von Content für diverse Kanäle (Websites, Social Media, Pressemitteilungen).</li>
-                            <li class="bullet-point-icon">Koordination und Abstimmung mit internen Abteilungen und externen Partnern.</li>
-                            <li class="bullet-point-icon">Analyse von Marketingkennzahlen zur Optimierung von Kampagnen.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">Praktikant Stabsstelle für Europaangelegenheiten</h3>
-                        <p class="text-gray-600 text-sm mb-1">Stadt Essen | 01/2024 – 03/2024</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Unterstützung bei der Kommunikation und Aufbereitung politischer Inhalte für verschiedene Zielgruppen.</li>
-                            <li class="bullet-point-icon">Einblicke in die Verwaltungskommunikation und Öffentlichkeitsarbeit.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Ausbildung</h2>
-                <div class="space-y-4">
-                    <div>
-                        <h3 class="text-lg font-semibold">M.A. European Culture and Economy (ECUE)</h3>
-                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 10/2021 – 03/2024</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Vertiefte Kenntnisse in gesellschaftlichen, politischen und administrativen Prozessen auf europäischer Ebene.</li>
-                            <li class="bullet-point-icon">Schärfung analytischer und interdisziplinärer Fähigkeiten zur Bearbeitung komplexer Fragestellungen.</li>
-                            <li class="bullet-point-icon">Forschung und Präsentation von Themen mit Bezug zu Kommunikation und Kultur.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">B.A. 2-Fach Bachelor of Arts Englisch und Geschichte</h3>
-                        <p class="text-gray-600 text-sm mb-1">Ruhr-Universität Bochum | 04/2011 – 03/2021</p>
-                        <ul class="list-none pl-4 space-y-1 text-sm text-gray-700">
-                            <li class="bullet-point-icon">Erwerb fundierter Kenntnisse in Textanalyse, kritischem Denken und historischer Forschung.</li>
-                            <li class="bullet-point-icon">Stärkung der schriftlichen und mündlichen Kommunikationsfähigkeiten in Deutsch und Englisch.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Fähigkeiten & Tools</h2>
-                <div class="space-y-4 text-sm text-gray-700">
-                    <div>
-                        <h3 class="font-semibold mb-1">Social Media Management:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Strategieentwicklung, Content-Planung, Community Management, Kampagnenführung auf gängigen Plattformen (Facebook, Instagram, Twitter/X, TikTok, YouTube).</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Digitale Kommunikation:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Entwicklung von Kommunikationsstrategien, Online-Redaktion, E-Mail-Marketing.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Content Creation:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Texten (Web, Social Media, Pressemitteilungen), Bildbearbeitung (Canva, Figma), grundlegende Videobearbeitung.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Webanalyse:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Google Analytics, Auswertung von Social Media Insights zur Performance-Optimierung.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Projektmanagement:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Planung, Koordination und Steuerung von Projekten, Stakeholder-Management.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Kommunikation:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Exzellente mündliche und schriftliche Kommunikationsfähigkeiten, Präsentation, Moderation.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Analytische Fähigkeiten:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Datenanalyse, Problemlösung, schnelle Einarbeitung in neue Themenfelder.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Sprachen:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Deutsch (Muttersprache), Englisch (Fließend in Wort und Schrift).</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-1">Tools:</h3>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">MS Office (Word, Excel, PowerPoint), Google Workspace, Figma, Canva, [ggf. weitere Social Media Management Tools wie Hootsuite, Buffer, Sprout Social etc. hinzufügen].</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section> <h2 class="text-2xl font-semibold section-heading accent-color">Interessen & Engagement</h2>
-                <div class="space-y-4 text-sm text-gray-700">
-                    <div>
-                        <ul class="list-none pl-4 space-y-1">
-                            <li class="bullet-point-icon">Ausgeprägtes Interesse an politischer Kommunikation und gesellschaftlichen Debatten, insbesondere im Kontext linker Politik.</li>
-                            <li class="bullet-point-icon">Bereitschaft zur flexiblen Arbeitszeitgestaltung, einschließlich Abend- und Wochenendterminen.</li>
-                            <li class="bullet-point-icon">Sehr große Identifikation mit der Partei die Linke (Mitglied) und Interesse an neuesten linken politischen Trends und Theorien.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-        </div>
+        <!-- Rechtes Sharepic -->
+        <div class="sharepic sharepic-right"></div>
     </div>
 
     <script>
