@@ -23,6 +23,7 @@
             min-height: 100vh; /* Mindesthöhe des Viewports */
             overflow-x: hidden;
             box-sizing: border-box;
+            position: relative; /* For the fixed arrow */
         }
 
         .page-heading {
@@ -86,12 +87,80 @@
             gap: 10px;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 40px; /* Abstand zur Karte */
         }
 
         .back-button:hover {
             background-color: #C20024; /* Dunkleres Rot beim Hover */
             transform: translateY(-3px);
         }
+
+        /* Navigationspfeil */
+        .nav-arrow {
+            position: fixed; /* Fixiert am Viewport */
+            right: 20px; /* Abstand vom rechten Rand */
+            top: 50%;
+            transform: translateY(-50%); /* Zentriert vertikal */
+            background-color: #E4002B; /* Primary Linke Red */
+            color: white;
+            padding: 20px; /* Larger arrow */
+            border-radius: 50%; /* Round */
+            font-size: 1.8em; /* Larger arrow */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            z-index: 100; /* Über allen anderen Inhalten */
+            animation: float-arrow 2s ease-in-out infinite alternate; /* Floating-Animation */
+        }
+
+        @keyframes float-arrow {
+            0% { transform: translateY(-50%) translateX(0px); }
+            50% { transform: translateY(-58%) translateX(0px); } /* Leichte vertikale Bewegung */
+            100% { transform: translateY(-50%) translateX(0px); }
+        }
+
+        .nav-arrow:hover {
+            background-color: #C20024; /* Darker red on hover */
+            transform: translateY(-50%) scale(1.1); /* Slight zoom and stay centered */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            animation-play-state: paused; /* Pause animation on hover */
+        }
+        
+        /* Hinweis für den Pfeil */
+        .nav-arrow-hint {
+            position: absolute;
+            right: calc(100% + 15px); /* Positioniert links neben dem Pfeil */
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            white-space: nowrap; /* Prevent text wrapping */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .nav-arrow:hover .nav-arrow-hint {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsivität für den Pfeil und Hinweis */
+        @media (max-width: 768px) {
+            .nav-arrow {
+                right: 10px;
+                padding: 10px;
+                font-size: 1.2em;
+            }
+            .nav-arrow-hint {
+                display: none; /* Hide hint on small screens */
+            }
+        }
+
 
         /* Responsivität */
         @media (min-width: 768px) {
@@ -131,5 +200,31 @@
     <a href="index.html" class="back-button">
         <i class="fa-solid fa-arrow-left"></i> Zurück zum Lebenslauf
     </a>
+
+    <!-- Navigationspfeil zur Yannik Check Seite -->
+    <a href="yannik_linke_check.html" class="nav-arrow" id="next-page-arrow">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span class="nav-arrow-hint">Meine Qualifikationen!</span>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navArrowHint = document.getElementById('next-page-arrow').querySelector('.nav-arrow-hint');
+
+            // Initial display and fade out of hint for this page's arrow
+            setTimeout(() => {
+                if (navArrowHint) {
+                    navArrowHint.style.opacity = '1';
+                    navArrowHint.style.visibility = 'visible';
+                }
+                setTimeout(() => {
+                    if (navArrowHint) {
+                        navArrowHint.style.opacity = '0';
+                        navArrowHint.style.visibility = 'hidden';
+                    }
+                }, 3000); // Hinweis 3 Sekunden sichtbar
+            }, 2000); // Hinweis erscheint nach 2 Sekunden
+        });
+    </script>
 </body>
 </html>
