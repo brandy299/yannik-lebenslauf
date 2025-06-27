@@ -25,6 +25,20 @@
             box-sizing: border-box;
         }
 
+        .page-heading {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ffffff; /* Weiße Überschrift auf dunklem Hintergrund */
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .sharepic-container {
             display: flex;
             flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
@@ -97,10 +111,14 @@
             .sharepic-item {
                 max-width: none; /* Keine maximale Breite, um sich anzupassen */
             }
+            .page-heading {
+                font-size: 1.8em; /* Kleinere Schriftgröße auf Mobilgeräten */
+            }
         }
     </style>
 </head>
 <body>
+    <h1 class="page-heading">Starke Botschaften. Moderne Umsetzung.</h1>
     <div class="sharepic-container">
         <div class="sharepic-item">
             <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpeg" alt="Sharepic 1 - Weniger Labern, mehr Anpacken!">
