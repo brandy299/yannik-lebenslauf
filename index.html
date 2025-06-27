@@ -190,9 +190,9 @@
             transform: translateY(-50%);
             background-color: var(--primary-color);
             color: white;
-            padding: 15px;
+            padding: 20px; /* Größerer Pfeil */
             border-radius: 50%; /* Rund */
-            font-size: 1.5em;
+            font-size: 1.8em; /* Größerer Pfeil */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -200,12 +200,20 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             z-index: 100; /* Über allen anderen Inhalten */
+            animation: float-arrow 2s ease-in-out infinite alternate; /* Floating-Animation */
+        }
+
+        @keyframes float-arrow {
+            0% { transform: translateY(-50%) translateX(0px); }
+            50% { transform: translateY(-58%) translateX(0px); } /* Leichte vertikale Bewegung */
+            100% { transform: translateY(-50%) translateX(0px); }
         }
 
         .nav-arrow:hover {
             background-color: #C20024; /* Dunkleres Rot beim Hover */
             transform: translateY(-50%) scale(1.1); /* Leichter Zoom und zentriert bleiben */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            animation-play-state: paused; /* Animation beim Hover pausieren */
         }
         
         /* Hinweis für den Pfeil */
@@ -523,9 +531,25 @@
             const clickZoomLevels = [1.9, 2.1, 2.3, 2.5]; // These are absolute scales for progressive zoom
 
             let currentZoomTimeout;
+            const navArrowHint = document.querySelector('.nav-arrow-hint');
 
             // Set initial scale on load
             profileImage.style.transform = `scale(${defaultScale})`;
+
+            // Initial display and fade out of hint
+            setTimeout(() => {
+                if (navArrowHint) {
+                    navArrowHint.style.opacity = '1';
+                    navArrowHint.style.visibility = 'visible';
+                }
+                setTimeout(() => {
+                    if (navArrowHint) {
+                        navArrowHint.style.opacity = '0';
+                        navArrowHint.style.visibility = 'hidden';
+                    }
+                }, 3000); // Hinweis 3 Sekunden sichtbar
+            }, 2000); // Hinweis erscheint nach 2 Sekunden
+
 
             if (profileImageContainer && profileImage) {
                 // Mouseenter event for hover zoom
