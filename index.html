@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background-dark);
+            background-color: var(--background-dark); /* Hintergrundfarbe des Bodys */
             color: var(--text-color-dark);
             padding: 0;
             margin: 0;
@@ -27,7 +27,7 @@
             --text-color-dark: #333333;
             --text-color-light: #f4f4f4;
             --background-light: #ffffff;
-            --background-dark: #f0f2f5;
+            --background-dark: #F5F5F5; /* Sehr helles Grau als Hintergrund */
             --border-color: #E0E0E0;
         }
 
@@ -65,7 +65,8 @@
 
         @keyframes idle-subtle-glow {
             0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-            100% { box-shadow: 0 4px 6px 15px rgba(228, 0, 43, 0.6), 0 2px 4px 8px rgba(228, 0, 43, 0.3); } /* Angepasst an --primary-color */
+            /* Angepasst an --primary-color */
+            100% { box-shadow: 0 4px 6px 15px rgba(228, 0, 43, 0.6), 0 2px 4px 8px rgba(228, 0, 43, 0.3); } 
         }
 
         .profile-image-wrapper:hover,
@@ -141,7 +142,7 @@
 
         /* Main CV content card */
         .main-content-card {
-            background-color: #ffffff;
+            background-color: var(--background-light); /* Hintergrund Weiß */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border-radius: 8px;
             padding: 3rem 1rem;
@@ -162,12 +163,12 @@
         }
 
         section {
-            background-color: #ffffff;
+            background-color: var(--background-light); /* Hintergrund Weiß */
             border-radius: 8px;
             padding: 2rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             margin-bottom: 2rem;
-            color: #333333;
+            color: var(--text-color-dark);
         }
         section:last-of-type {
             margin-bottom: 0;
@@ -178,7 +179,7 @@
             padding-top: 0;
         }
         section h3 {
-            color: #333333;
+            color: var(--text-color-dark);
         }
         section p.text-gray-600 {
             color: #666666;
@@ -207,13 +208,14 @@
         
         .sharepic-left {
             margin-right: 20px; /* Abstand zwischen linkem Sharepic und CV */
-            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpeg'); /* Korrigierte Dateiendung */
+            /* Korrekte URL für GitHub Pages. Hinweis: In der Canvas-Vorschau könnten diese Bilder aufgrund von CORS-Regeln blockiert werden. */
+            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpeg'); 
         }
 
         .sharepic-right {
             margin-left: 20px; /* Abstand zwischen rechtem Sharepic und CV */
-            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370123.jpeg'); /* Korrigierte Dateiendung */
-            /* transform: scaleX(-1); */ /* Entferntes Spiegeln, damit Text lesbar ist */
+            /* Korrekte URL für GitHub Pages. Hinweis: In der Canvas-Vorschau könnten diese Bilder aufgrund von CORS-Regeln blockiert werden. */
+            background-image: url('https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370123.jpeg');
         }
         /* Die Hover-Animation des rechten Sharepics braucht KEINE extra Spiegelung mehr, da das Bild selbst nicht gespiegelt ist */
         .sharepic-right:hover {
@@ -348,6 +350,7 @@
             
             <div class="left-column lg:w-1/3 p-8 bg-gray-800 text-white flex flex-col items-center text-center">
                 <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
+                    <!-- Bildpfad für GitHub Pages. In der Canvas-Vorschau kann dies unter Umständen nicht angezeigt werden. -->
                     <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
                     <div id="hire-me-banner" class="hire-me-banner">HIRE ME!</div>
                 </div>
