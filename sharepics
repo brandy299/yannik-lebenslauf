@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yannik Brand - Sharepics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlalTjs12kE+8r3m4D1a1B7y/j8X0+v6+7Q2Q7z7l02/7U04W4+K/7F9b9t9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #5D0E29; /* Tiefer Burgunderrot-Hintergrund für die Sharepic-Seite */
+            color: #f4f4f4;
+            margin: 0;
+            padding: 20px; /* Padding um die Bilder */
+            display: flex;
+            flex-direction: column; /* Elemente untereinander anordnen */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Mindesthöhe des Viewports */
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .sharepic-container {
+            display: flex;
+            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
+            gap: 40px; /* Abstand zwischen den Bildern */
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px; /* Max. Breite für den Container der Bilder */
+            margin-bottom: 40px; /* Abstand zum Zurück-Button */
+        }
+
+        .sharepic-item {
+            background-color: rgba(255, 255, 255, 0.1); /* Leichter transparenter Hintergrund */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            width: 100%; /* Standardmäßig volle Breite auf Mobilgeräten */
+            max-width: 450px; /* Max. Breite für ein einzelnes Sharepic */
+            flex-shrink: 0; /* Verhindert Schrumpfung */
+        }
+
+        .sharepic-item:hover {
+            transform: translateY(-10px) scale(1.02); /* Nach oben bewegen und leicht zoomen */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .sharepic-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px; /* Abgerundete Ecken für das Bild selbst */
+        }
+
+        .back-button {
+            background-color: #E4002B; /* Das Linke Rot */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 9999px; /* Pillenform */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background-color: #C20024; /* Dunkleres Rot beim Hover */
+            transform: translateY(-3px);
+        }
+
+        /* Responsivität */
+        @media (min-width: 768px) {
+            .sharepic-container {
+                flex-direction: row; /* Nebeneinander auf größeren Bildschirmen */
+                align-items: flex-start; /* Oben ausrichten */
+            }
+            .sharepic-item {
+                width: calc(50% - 20px); /* 50% Breite minus halber Gap */
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 10px; /* Weniger Padding auf kleinen Bildschirmen */
+            }
+            .sharepic-item {
+                max-width: none; /* Keine maximale Breite, um sich anzupassen */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sharepic-container">
+        <div class="sharepic-item">
+            <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpeg" alt="Sharepic 1 - Weniger Labern, mehr Anpacken!">
+        </div>
+        <div class="sharepic-item">
+            <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370123.jpeg" alt="Sharepic 2 - Die Linke ist unsere einzige Chance. Und ich will Teil davon sein.">
+        </div>
+    </div>
+    
+    <a href="index.html" class="back-button">
+        <i class="fa-solid fa-arrow-left"></i> Zurück zum Lebenslauf
+    </a>
+</body>
+</html>
