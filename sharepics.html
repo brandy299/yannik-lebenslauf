@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yannik Brand - Sharepics</title>
+    <title>Yannik Brand - Die Linke Check</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,73 +12,64 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #5D0E29; /* Tiefer Burgunderrot-Hintergrund für die Sharepic-Seite */
+            background-color: #314251; /* Dunkelblau-grauer Hintergrund aus dem Bild */
             color: #f4f4f4;
             margin: 0;
-            padding: 20px; /* Padding um die Bilder */
+            padding: 20px; /* Standard-Padding für kleinere Bildschirme */
             display: flex;
-            flex-direction: column; /* Elemente untereinander anordnen */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Mindesthöhe des Viewports */
-            overflow-x: hidden;
+            min-height: 100vh;
             box-sizing: border-box;
-            position: relative; /* For the fixed arrow */
+            overflow-x: hidden;
         }
 
-        .page-heading {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #ffffff; /* Weiße Überschrift auf dunklem Hintergrund */
-            margin-bottom: 40px;
-            text-align: center;
-            animation: fadeInDown 1s ease-out;
+        /* Anpassung des Body-Padding für größere Bildschirme */
+        @media (min-width: 769px) {
+            body {
+                padding: 40px; /* Mehr Padding für Desktop-Ansicht */
+            }
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        :root {
+            --primary-linke-red: #E4002B; /* Das Linke Rot */
         }
 
-        .sharepic-container {
-            display: flex;
-            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
-            gap: 40px; /* Abstand zwischen den Bildern */
-            justify-content: center;
-            align-items: center;
+        .image-container {
             width: 100%;
-            max-width: 1200px; /* Max. Breite für den Container der Bilder */
-            margin-bottom: 40px; /* Abstand zum Zurück-Button */
-        }
-
-        .sharepic-item {
-            background-color: rgba(255, 255, 255, 0.1); /* Leichter transparenter Hintergrund */
+            max-width: 90vw; /* Nutzt 90% der Viewport-Breite für größere Responsivität */
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            width: 100%; /* Standardmäßig volle Breite auf Mobilgeräten */
-            max-width: 450px; /* Max. Breite für ein einzelnes Sharepic */
-            flex-shrink: 0; /* Verhindert Schrumpfung */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            /* Zusätzliche Stile für den Fall, dass das Bild nicht lädt */
+            background-color: #5D6D7E; /* Hintergrundfarbe für den Container, wenn Bild nicht lädt */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px; /* Mindesthöhe für den Platzhalter */
         }
 
-        .sharepic-item:hover {
-            transform: translateY(-10px) scale(1.02); /* Nach oben bewegen und leicht zoomen */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-        }
-
-        .sharepic-item img {
+        .image-container img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 12px; /* Abgerundete Ecken für das Bild selbst */
+        }
+
+        /* Stil für den Bild-Platzhalter */
+        .image-placeholder {
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2em;
         }
 
         .back-button {
-            background-color: #E4002B; /* Das Linke Rot */
+            background-color: var(--primary-linke-red);
             color: white;
             padding: 15px 30px;
-            border-radius: 9999px; /* Pillenform */
+            border-radius: 9999px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2em;
@@ -87,144 +78,43 @@
             gap: 10px;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 40px; /* Abstand zur Karte */
         }
 
         .back-button:hover {
-            background-color: #C20024; /* Dunkleres Rot beim Hover */
+            background-color: #C20024;
             transform: translateY(-3px);
         }
 
-        /* Navigationspfeil */
-        .nav-arrow {
-            position: fixed; /* Fixiert am Viewport */
-            right: 20px; /* Abstand vom rechten Rand */
-            top: 50%;
-            transform: translateY(-50%); /* Zentriert vertikal */
-            background-color: #E4002B; /* Primary Linke Red */
-            color: white;
-            padding: 20px; /* Larger arrow */
-            border-radius: 50%; /* Round */
-            font-size: 1.8em; /* Larger arrow */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            z-index: 100; /* Über allen anderen Inhalten */
-            animation: float-arrow 2s ease-in-out infinite alternate; /* Floating-Animation */
-        }
-
-        @keyframes float-arrow {
-            0% { transform: translateY(-50%) translateX(0px); }
-            50% { transform: translateY(-58%) translateX(0px); } /* Leichte vertikale Bewegung */
-            100% { transform: translateY(-50%) translateX(0px); }
-        }
-
-        .nav-arrow:hover {
-            background-color: #C20024; /* Darker red on hover */
-            transform: translateY(-50%) scale(1.1); /* Slight zoom and stay centered */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            animation-play-state: paused; /* Pause animation on hover */
-        }
-        
-        /* Hinweis für den Pfeil */
-        .nav-arrow-hint {
-            position: absolute;
-            right: calc(100% + 15px); /* Positioniert links neben dem Pfeil */
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9em;
-            white-space: nowrap; /* Prevent text wrapping */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .nav-arrow:hover .nav-arrow-hint {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Responsivität für den Pfeil und Hinweis */
+        /* Responsive Anpassungen */
         @media (max-width: 768px) {
-            .nav-arrow {
-                right: 10px;
-                padding: 10px;
-                font-size: 1.2em;
+            .image-container {
+                max-width: 100%; /* Volle Breite auf kleineren Bildschirmen */
+                border-radius: 0; /* Keine Abrundung auf kleinen Bildschirmen */
+                box-shadow: none; /* Kein Schatten auf kleinen Bildschirmen */
             }
-            .nav-arrow-hint {
-                display: none; /* Hide hint on small screens */
-            }
-        }
-
-
-        /* Responsivität */
-        @media (min-width: 768px) {
-            .sharepic-container {
-                flex-direction: row; /* Nebeneinander auf größeren Bildschirmen */
-                align-items: flex-start; /* Oben ausrichten */
-            }
-            .sharepic-item {
-                width: calc(50% - 20px); /* 50% Breite minus halber Gap */
-            }
-        }
-
-        @media (max-width: 767px) {
             body {
-                padding: 10px; /* Weniger Padding auf kleinen Bildschirmen */
+                padding: 0; /* Kein Padding für volle Bildanzeige auf kleinen Bildschirmen */
             }
-            .sharepic-item {
-                max-width: none; /* Keine maximale Breite, um sich anzupassen */
-            }
-            .page-heading {
-                font-size: 1.8em; /* Kleinere Schriftgröße auf Mobilgeräten */
+            .back-button {
+                font-size: 1em;
+                padding: 10px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <h1 class="page-heading">Starke Botschaften. Moderne Umsetzung.</h1>
-    <div class="sharepic-container">
-        <div class="sharepic-item">
-            <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370115.jpeg" alt="Sharepic 1 - Weniger Labern, mehr Anpacken!">
-        </div>
-        <div class="sharepic-item">
-            <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/sharepic-370123.jpeg" alt="Sharepic 2 - Die Linke ist unsere einzige Chance. Und ich will Teil davon sein.">
-        </div>
+    <div class="image-container">
+        <!-- Der korrekte Pfad zu deinem Bild auf GitHub Raw Content. 
+             Beachte: In der Canvas-Vorschau kann dieses Bild aufgrund von CORS-Regeln möglicherweise nicht angezeigt werden. -->
+        <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/yannikcheck_1.png" 
+             alt="Yannik Brand im Die Linke Check - Qualifikationen und Erfahrung"
+             onerror="this.onerror=null;this.src='https://placehold.co/600x400/5D6D7E/ffffff?text=Bild+konnte+nicht+geladen+werden'; this.classList.add('image-placeholder');">
+        <!-- Fallback-Text für den Platzhalter -->
+        <span class="image-placeholder" style="display:none;">Bild konnte nicht geladen werden.</span>
     </div>
     
-    <a href="index.html" class="back-button">
-        <i class="fa-solid fa-arrow-left"></i> Zurück zum Lebenslauf
+    <a href="sharepics.html" class="back-button">
+        <i class="fa-solid fa-arrow-left"></i> Zurück
     </a>
-
-    <!-- Navigationspfeil zur Yannik Check Seite -->
-    <a href="yannik_linke_check.html" class="nav-arrow" id="next-page-arrow">
-        <i class="fa-solid fa-arrow-right"></i>
-        <span class="nav-arrow-hint">Meine Qualifikationen!</span>
-    </a>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navArrowHint = document.getElementById('next-page-arrow').querySelector('.nav-arrow-hint');
-
-            // Initial display and fade out of hint for this page's arrow
-            setTimeout(() => {
-                if (navArrowHint) {
-                    navArrowHint.style.opacity = '1';
-                    navArrowHint.style.visibility = 'visible';
-                }
-                setTimeout(() => {
-                    if (navArrowHint) {
-                        navArrowHint.style.opacity = '0';
-                        navArrowHint.style.visibility = 'hidden';
-                    }
-                }, 3000); // Hinweis 3 Sekunden sichtbar
-            }, 2000); // Hinweis erscheint nach 2 Sekunden
-        });
-    </script>
 </body>
 </html>
