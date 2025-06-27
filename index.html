@@ -10,37 +10,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlalTjs12kE+8r3m4D1a1B7y/j8X0+v6+7Q2Q7z7l02/7U04W4+K/7F9b9t9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        :root {
+            --primary-color: #E4002B; /* Gängiger Rotton für Die Linke */
+            --text-color-dark: #333333;
+            --text-color-light: #f4f4f4;
+            --background-light: #ffffff;
+            --background-dark: #f0f2f5;
+            --border-color: #E0E0E0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            /* Hintergrund: Reines Weiß für eine professionelle und ruhige Optik */
-            background-color: #FFFFFF;
-            color: #333333; /* Haupttext Dunkelgrau für Lesbarkeit */
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
             padding: 0;
             margin: 0;
-            line-height: 1.5; /* Standard-Zeilenhöhe für gute Lesbarkeit */
+            line-height: 1.5;
         }
 
         /* Akzentfarbe für Überschriften und Icons */
         .accent-color {
-            color: #EF4444; /* Roter Akzent wie zuvor */
+            color: var(--primary-color); /* Verwendet die neue Primärfarbe */
         }
         .section-heading {
-            border-bottom: 2px solid #E0E0E0; /* Hellgraue Trennlinie */
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
         .bullet-point-icon::before {
-            content: '•'; /* Unicode Aufzählungszeichen */
+            content: '•';
             display: inline-block;
             width: 1em;
             margin-left: -1em;
-            color: #EF4444; /* Akzentfarbe für Aufzählungszeichen im Hauptteil */
+            color: var(--primary-color); /* Akzentfarbe für Aufzählungszeichen im Hauptteil */
         }
         /* Spezifische Farbe für Bullet Points in der linken Spalte */
         .left-column .bullet-point-icon::before {
             color: #FFFFFF; /* Weiße Bullet Points für bessere Lesbarkeit auf dunklem Hintergrund */
         }
-
 
         /* Regeln für das Profilbild */
         .profile-image-wrapper {
@@ -49,190 +56,172 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer; /* Zeigt an, dass es klickbar ist */
-            /* Subtiler, langsamer Schatten als Klick-Hinweis */
+            cursor: pointer;
             animation: idle-subtle-glow 4s ease-in-out infinite alternate;
         }
 
         @keyframes idle-subtle-glow {
-            0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } /* Standard Schatten */
-            100% { box-shadow: 0 4px 6px 15px rgba(255, 215, 0, 0.6), 0 2px 4px 8px rgba(255, 215, 0, 0.3); } /* Deutlicherer Gelb-Schatten */
+            0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+            100% { box-shadow: 0 4px 6px 15px rgba(228, 0, 43, 0.6), 0 2px 4px 8px rgba(228, 0, 43, 0.3); } /* Anpassung an Die Linke Rot */
         }
 
         .profile-image-wrapper:hover,
         .profile-image-wrapper.clicked-glow {
-            animation-play-state: paused; /* Pausiert die Idle-Animation bei Hover oder Klick-Glow */
-            /* Stellt sicher, dass der Standard-Schatten wiederhergestellt wird, bevor der Klick-Glow greift */
+            animation-play-state: paused;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .profile-image {
-            transition: transform 0.3s ease-in-out; /* Nur Transform-Transition, Border-Color wird per JS/Class gesetzt */
+            transition: transform 0.3s ease-in-out;
             transform-origin: center center;
-            /* Standard-Zoom wird per JS gesetzt */
         }
 
         /* Click glow effect für den Rahmen */
         .profile-image-wrapper.clicked-glow {
-            animation: border-glow-pulse 0.3s ease-out; /* Schneller und deutlicher */
+            animation: border-glow-pulse 0.3s ease-out;
         }
 
         @keyframes border-glow-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 1); } /* Start mit vollem Glow */
-            100% { box-shadow: 0 0 0 40px rgba(255, 215, 0, 0); } /* Noch weiter expandieren und ausfaden */
+            0% { box-shadow: 0 0 0 0 rgba(228, 0, 43, 1); } /* Anpassung an Die Linke Rot */
+            100% { box-shadow: 0 0 0 40px rgba(228, 0, 43, 0); } /* Anpassung an Die Linke Rot */
         }
 
         /* Hire Me Banner */
         .hire-me-banner {
             position: absolute;
-            top: 50%; /* Zentriert vertikal im Wrapper */
-            left: 50%; /* Zentriert horizontal im Wrapper */
-            /* Startet von unten und ist kleiner */
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, 50%) scale(0.5); 
-            padding: 1rem 2rem; /* Größerer Innenabstand */
-            background-image: linear-gradient(to right, #BE3175, #A02860); /* Verlaufender Hintergrund */
+            padding: 1rem 2rem;
+            background-color: var(--primary-color); /* Anpassung an Die Linke Rot */
             color: white;
-            border-radius: 9999px; /* Pillenform */
+            border-radius: 9999px;
             font-weight: bold;
-            font-size: 1.8rem; /* Größere Schrift */
-            opacity: 0; /* Standardmäßig unsichtbar */
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Längere, sanftere Übergänge */
-            z-index: 20; /* Über dem Bild */
+            font-size: 1.8rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            z-index: 20;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Starker Schatten für das Banner */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
         }
         .hire-me-active {
-            opacity: 1; /* Sichtbar, wenn aktiv */
-            transform: translate(-50%, -50%) scale(1); /* Skaliert auf normale Größe und zentriert sich */
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
         .hire-me-fading-out {
             opacity: 0;
-            transform: translate(-50%, 50%) scale(0.5); /* Fadet nach unten und wird kleiner beim Ausblenden */
+            transform: translate(-50%, 50%) scale(0.5);
         }
 
         /* Sticky-Effekt nur für größere Bildschirme (Desktop) */
         .left-column-sticky {
-            position: static; /* Standardmäßig nicht sticky auf kleinen Bildschirmen */
+            position: static;
         }
-        @media (min-width: 1024px) { /* Ab 'lg' Breakpoint (1024px) wird es sticky */
+        @media (min-width: 1024px) {
             .left-column-sticky {
                 position: sticky;
-                top: 0px; /* Abstand vom oberen Rand beim Sticky-Effekt auf 0 gesetzt */
-                align-self: flex-start; /* Stellt sicher, dass die Box oben klebt und nicht streckt */
-                z-index: 10; /* Damit sie über Inhalten der rechten Spalte liegt, wenn gescrollt wird */
+                top: 0px;
+                align-self: flex-start;
+                z-index: 10;
             }
         }
 
         /* Sektionen und Hauptcontainer bleiben hell */
-        .main-content-card { /* Neue Klasse für den Hauptcontainer */
-            background-color: #ffffff; /* Hintergrund Weiß */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sanfter Schatten */
-            border-radius: 8px; /* Abgerundete Ecken */
-            padding: 3rem 1rem; /* Vertikales Padding hier hinzugefügt */
+        .main-content-card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 8px;
+            padding: 3rem 1rem;
         }
-        @media (min-width: 640px) { /* Anpassung für sm-Breakpoint */
+        @media (min-width: 640px) {
             .main-content-card {
                 padding: 3rem 2rem;
             }
         }
-        @media (min-width: 1024px) { /* Anpassung für lg-Breakpoint */
+        @media (min-width: 1024px) {
             .main-content-card {
                 padding: 3rem;
             }
         }
 
         section {
-            background-color: #ffffff; /* Hintergrundfarbe für die Sektionen */
-            border-radius: 8px; /* Abgerundete Ecken für den "Karten"-Look */
-            padding: 2rem; /* Innenabstand für den Inhalt der Sektion */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Leichterer Schatten für helle Sektionen */
-            margin-bottom: 2rem; /* Abstand zwischen den Sektionen */
-            color: #333333; /* Textfarbe für Sektionen */
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            margin-bottom: 2rem;
+            color: #333333;
         }
-        /* Anpassung des letzten Sektionsabstands */
         section:last-of-type {
             margin-bottom: 0;
         }
-        /* Anpassung des section-heading, da jetzt padding auf der section ist */
         .section-heading {
-            margin-top: 0; /* Kein Top-Margin, da Section Padding hat */
-            margin-bottom: 1.5rem; /* Abstand unter der Überschrift */
-            padding-top: 0; /* Kein Top-Padding, da Section Padding hat */
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-top: 0;
         }
-        /* Anpassung der Textfarben in Sektionen für bessere Lesbarkeit auf hellem Hintergrund */
         section h3 {
-            color: #333333; /* Überschriften in Sektionen dunkel */
+            color: #333333;
         }
         section p.text-gray-600 {
-            color: #666666; /* Datum/Ort in Sektionen dunkler Grau */
+            color: #666666;
         }
         section ul.text-gray-700 li {
-            color: #444444; /* Listenpunkte in Sektionen dunkler Grau */
+            color: #444444;
         }
-        /* Links in der linken Spalte */
-        /* Diese Regeln wurden durch direkte Tailwind-Klassen im HTML ersetzt */
-        /* .left-column-sticky a {
-            color: #FFFFFF;
-        }
-        .left-column-sticky a:hover {
-            color: #F0F0F0;
-        } */
 
         /* Anpassungen für Druckansicht (für PDF-Generierung) */
         @media print {
             body {
-                background-color: #FFFFFF !important; /* Sicherstellen, dass der Hintergrund weiß bleibt */
-                font-size: 10pt; /* Kleinere Schrift für den Druck */
+                background-color: #FFFFFF !important;
+                font-size: 10pt;
             }
             .main-content-card {
                 box-shadow: none !important;
                 border-radius: 0 !important;
-                width: auto !important; /* Auto-Breite, um sich an die Seitenränder anzupassen */
-                max-width: none !important; /* Keine maximale Breite */
-                margin: 0 !important; /* Keine zusätzlichen Margins */
-                padding: 0 !important; /* Kein Padding hier, da @page margin gesetzt ist */
+                width: auto !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
                 display: block !important;
                 flex-direction: column !important;
             }
 
-            /* Spalten für den Druck stapeln und volle Breite einnehmen */
             .lg\:w-1\/3, .lg\:w-2\/3 {
                 width: 100% !important;
-                padding: 0.5cm 0 !important; /* Etwas vertikales Padding für Abschnitte, kein horizontales */
+                padding: 0.5cm 0 !important;
             }
 
             .left-column-sticky {
                 position: static !important;
-                margin-bottom: 1cm !important; /* Abstand unter dem Header-Bereich */
-                padding-top: 0.5cm !important; /* Etwas Padding oben für den Header-Bereich */
-                padding-bottom: 0.5cm !important; /* Etwas Padding unten für den Header-Bereich */
-                padding-left: 0 !important; /* Kein Padding von p-8 für Print */
-                padding-right: 0 !important; /* Kein Padding von p-8 für Print */
-                text-align: left !important; /* Text im Header linksbündig für Print */
-                align-items: flex-start !important; /* Elemente im Header linksbündig für Print */
+                margin-bottom: 1cm !important;
+                padding-top: 0.5cm !important;
+                padding-bottom: 0.5cm !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+                align-items: flex-start !important;
+                background-color: #E4002B !important; /* Anpassung an Die Linke Rot im Druck */
             }
             .left-column-sticky h1,
             .left-column-sticky p {
-                text-align: left !important; /* Sicherstellen, dass der Text im Header linksbündig ist */
+                text-align: left !important;
             }
-            .left-column-sticky .w-24 { /* Die Akzentlinie */
-                margin-left: 0 !important; /* Links ausrichten */
+            .left-column-sticky .w-24 {
+                margin-left: 0 !important;
             }
 
-
-            /* Animationen/Übergänge für den Druck entfernen */
             * {
                 animation: none !important;
                 transition: none !important;
             }
 
-            /* Sicherstellen, dass Textfarben lesbar sind */
             .header-bg {
                 background-color: #333333 !important;
                 color: #ffffff !important;
             }
             .accent-color {
-                color: #BE3175 !important;
+                color: #E4002B !important; /* Anpassung an Die Linke Rot im Druck */
             }
             section h3 {
                 color: #333333 !important;
@@ -244,26 +233,24 @@
                 color: #444444 !important;
             }
             .left-column-sticky a {
-                color: #ffffff !important; /* Links in linker Spalte im Druck weiß */
+                color: #ffffff !important;
             }
             .left-column-sticky a:hover {
                 color: #F0F0F0 !important;
             }
 
-            /* Sicherstellen, dass der Profilbild-Zoom erhalten bleibt und keine interaktiven Elemente sichtbar sind */
             .profile-image-wrapper {
                 box-shadow: none !important;
                 animation: none !important;
-                width: 150px !important; /* Kleinere Größe für das Bild im Print-Header */
+                width: 150px !important;
                 height: 150px !important;
                 margin-bottom: 0.5cm !important;
             }
             .profile-image {
-                transform: scale(2.2) !important; /* Zoom beibehalten */
+                transform: scale(2.2) !important;
                 transition: none !important;
             }
 
-            /* Interaktive Elemente ausblenden */
             #hire-me-banner {
                 display: none !important;
             }
@@ -271,7 +258,6 @@
                 animation: none !important;
             }
 
-            /* Ensure sections don't break across pages awkwardly */
             section {
                 page-break-inside: avoid;
             }
