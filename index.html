@@ -123,13 +123,23 @@
 
         /* Sticky-Effekt für die linke Spalte */
         .left-column-wrapper {
-            /* Dies ist der Container, der sticky sein soll */
-            position: sticky;
-            top: 0; /* Klebt am oberen Rand */
-            height: 100vh; /* Nimmt die volle Höhe des Viewports ein */
-            overflow-y: auto; /* Ermöglicht Scrollen innerhalb der linken Spalte, falls Inhalt zu lang */
-            -webkit-overflow-scrolling: touch; /* Für flüssiges Scrollen auf iOS */
-            z-index: 10;
+            /* Standardmäßig für mobile Ansicht (unter 1024px) */
+            position: static;
+            height: auto;
+            overflow-y: visible; /* Standardverhalten, kein internes Scrollen */
+            z-index: 10; /* Bleibt aber über dem Inhalt */
+            width: 100%; /* Nimmt auf kleinen Bildschirmen volle Breite ein */
+        }
+
+        @media (min-width: 1024px) { /* Ab 'lg' Breakpoint (1024px) wird es sticky */
+            .left-column-wrapper {
+                position: sticky;
+                top: 0; /* Klebt am oberen Rand */
+                height: 100vh; /* Nimmt die volle Höhe des Viewports ein */
+                overflow-y: auto; /* Ermöglicht Scrollen innerhalb der linken Spalte, falls Inhalt zu lang */
+                -webkit-overflow-scrolling: touch; /* Für flüssiges Scrollen auf iOS */
+                width: 33.333333%; /* Entspricht lg:w-1/3 */
+            }
         }
 
         /* Main CV content card */
@@ -142,8 +152,24 @@
             min-width: 320px; /* Ensure it doesn't get too small */
             z-index: 2; /* Sorgt dafür, dass der CV über den Sharepics liegt */
             width: 100%; /* Stellt sicher, dass es auf kleinen Bildschirmen die volle Breite nutzt */
-            /* Removed flex-grow here as it's now handled by the parent flex container if needed */
+            display: flex; /* Macht es zu einem Flex-Container */
+            flex-direction: column; /* Standardmäßig Spaltenfluss (für mobile) */
         }
+        @media (min-width: 1024px) {
+            .main-content-card {
+                flex-direction: row; /* Ab lg-Breakpoint Zeilenfluss */
+            }
+        }
+
+        .main-content-card > .lg\:w-2\/3 { /* Die rechte Inhaltsspalte */
+            width: 100%; /* Nimmt volle Breite auf kleineren Bildschirmen */
+        }
+        @media (min-width: 1024px) {
+            .main-content-card > .lg\:w-2\/3 {
+                width: 66.666667%; /* Entspricht lg:w-2/3 */
+            }
+        }
+
         @media (min-width: 640px) {
             .main-content-card {
                 padding: 3rem 2rem;
@@ -152,7 +178,7 @@
         @media (min-width: 1024px) {
             .main-content-card {
                 padding: 3rem;
-        }
+            }
         }
 
         section {
@@ -266,17 +292,18 @@
                 flex-direction: column !important;
             }
 
-            .lg\:w-1\/3, .lg\:w-2\/3 {
-                width: 100% !important;
-                padding: 0.5cm 0 !important;
-            }
-
             .left-column-wrapper { /* Ensure this is static for print */
                 position: static !important;
                 height: auto !important;
                 overflow-y: visible !important;
+                width: 100% !important; /* Volle Breite im Druck */
+                padding-bottom: 0 !important; /* Kein unteres Padding für den Abstand zum nächsten Abschnitt */
             }
-            .left-column-sticky {
+            .main-content-card > .lg\:w-2\/3 {
+                width: 100% !important;
+            }
+
+            .left-column-sticky { /* This class is no longer used for sticky positioning, but for print styles */
                 position: static !important;
                 margin-bottom: 1cm !important;
                 padding-top: 0.5cm !important;
@@ -357,9 +384,9 @@
     </style>
 </head>
 <body>
-    <div class="main-content-card rounded-lg w-full max-w-5xl lg:flex">
+    <div class="main-content-card rounded-lg w-full max-w-5xl">
         
-        <div class="left-column-wrapper lg:w-1/3 bg-gray-800 text-white">
+        <div class="left-column-wrapper bg-gray-800 text-white">
             <div class="p-8 flex flex-col items-center text-center">
                 <div class="profile-image-wrapper w-64 h-64 rounded-full mb-6 border-4 border-white shadow-lg" id="profile-image-container">
                     <img src="https://raw.githubusercontent.com/brandy299/yannik-lebenslauf/main/bewerbungsfoto_06.jpg" alt="Bewerbungsfoto von Yannik Brand" class="object-cover w-full h-full profile-image" id="profile-image">
